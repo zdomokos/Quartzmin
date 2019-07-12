@@ -1,0 +1,65 @@
+<div class="ui inverted page dimmer" id="dimmer"><div class="ui loader"></div></div>
+<div class="ui small left icon input">
+  <input type="text" placeholder="Search Job..." id="search-job">
+  <i class="search icon"></i>
+</div>
+<span>&nbsp;</span>
+<div class="ui small floating dropdown labeled search icon button" id="job-group-filter">
+  <i class="filter icon"></i>
+  <span class="text">Job Group</span>
+  <div class="menu">
+    <div class="header">
+      Filter by group
+    </div>
+    <div class="divider"></div>
+    <div class="item" data-show-all="true"><i>All</i></div>
+    <div class="item" *ngFor="let group of []">{{ group }}</div>
+  </div>
+</div>
+<a class="ui right floated primary button" (click)="null">
+  <i class="plus icon"></i>New
+</a>
+
+<div id="msg-panel"></div>
+
+<table class="ui single line table highlight-rows" id="job-list">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Group</th>
+    <th>Class</th>
+    <th style="min-width: 160px">Next Fire Time</th>
+    <th>History</th>
+    <th>Flags</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let job of []">
+      <td class="job-name">
+        <a [routerLink]="[job.GroupName, job.JobName]" title="{{ job.Description }}">{{ job.JobName }}</a>
+      </td>
+      <td class="job-group">{{ job.Group }}</td>
+      <td class="job-type">{{ job.Type }}</td>
+      <td class="next-fire-time"></td>
+      <td class="job-histogram">
+        <app-histogram></app-histogram>
+      </td>
+      <td>
+        <div *ngIf="job.Persist" class="ui mini green label" title="Persist Job Data">P</div>
+        <div *ngIf="job.Recovery" class="ui mini purple label" title="Request Recovery">R</div>
+        <div *ngIf="job.Concurrent" class="ui mini orange label" title="Concurrent">C</div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<ng-template #menu>
+  <div>
+    <div class="ui small vertical menu borderless" id="job-context-menu">
+      <a class="item menu-edit"><i class="left large blue pencil alternate icon"></i>Edit</a>
+      <a class="item menu-copy"><i class="left large clone outline icon"></i>Copy</a>
+      <a class="item menu-trigger"><i class="left large green play icon"></i>Trigger</a>
+      <a class="item menu-delete"><i class="left large red trash alternate outline icon"></i>Delete</a>
+    </div>
+  </div>
+</ng-template>

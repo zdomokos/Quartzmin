@@ -1,0 +1,81 @@
+{{!<Layout}}
+{{#if Model.Job.IsNew}}
+{{ViewBag Title='Add Job'}}
+{{else}}
+{{ViewBag Title='Edit Job'}}
+{{/if}}
+
+<div class="ui inverted page dimmer" id="dimmer"><div class="ui loader"></div></div>
+<form class="ui form" id="form" method="post" enctype="multipart/form-data">
+  <div class="ui clearing basic segment" style="padding: 0px" id="header">
+    <div style="float: right">
+      <a class="ui button" id="btn-discard" href="{{ActionUrl ''}}">Discard Changes</a>
+      {{#unless Model.Job.IsNew}}
+      <div class="negative ui button" id="btn-delete">Delete</div>
+      {{/unless}}
+      <div class="ui buttons">
+        <div class="ui primary button" id="btn-save">Save</div>
+        <div class="ui floating dropdown icon primary button" id="save-dropdown">
+          <i class="dropdown icon"></i>
+          <div class="menu">
+            <div class="item ui basic button" id="btn-trigger"><i class="green play icon"></i> Save &amp; Trigger Immediately</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h1 class="ui left floated header">
+      {{#if Model.Job.IsNew}}Add Job{{else}}Edit Job "{{Model.Job.JobName}}"{{/if}}
+    </h1>
+  </div>
+
+  <div class="ui segment">
+    {{#with Model.Job}}
+    <input type="hidden" name="job[isNew]" value="{{IsNew}}" />
+    {{#unless IsNew}}
+    <input type="hidden" name="job[oldJobName]" value="{{JobName}}" />
+    <input type="hidden" name="job[oldGroup]" value="{{Group}}" />
+    {{/unless}}
+    <div id="job-properties">
+
+      <div class="two fields">
+        <div class="field accept-error">
+          <label>Name</label>
+          <input type="text" name="job[jobName]" placeholder="Name" value="{{JobName}}" id="jobName" />
+        </div>
+        <div class="field accept-error">
+          <label>Group</label>
+          <input type="hidden" value="{{Group}}" id="jobGroup" />
+          <select class="ui search selection dropdown allow-additions" name="job[group]">
+            <option value="">Group</option>
+            {{>DropdownOptions items=GroupList selected=Group}}
+          </select>
+        </div>
+      </div>
+
+      <div class="field accept-error">
+        <label>Class</label>
+        <input type="hidden" value="{{Type}}" id="jobType" />
+        <select class="ui search selection dropdown allow-additions" name="job[type]" id="jobTypeDropdown">
+          <option value="">Fully Qualified Type Name</option>
+          {{>DropdownOptions items=TypeList selected=Type}}
+        </select>
+      </div>
+
+      <div class="field accept-error">
+        <label>Description</label>
+        <textarea rows="2" name="job[description]">{{Description}}</textarea>
+      </div>
+
+      <div class="field accept-error">
+        <div class="ui checkbox">
+          <input name="job[recovery]" type="checkbox" value="True" {{Checked Recovery}} />
+          <label>Requests Recovery</label>
+        </div>
+      </div>
+    </div>
+    {{/with}}
+    <h3 class="ui dividing header">Job Data Map</h3>
+
+    {{>JobDataMap Model.DataMap}}
+  </div>
+</form>
