@@ -13,6 +13,7 @@ import { JobFormComponent } from './jobs/job-form/job-form.component';
 import { ConfirmationDialogComponent } from './dialogs/confirmation-dialog/confirmation-dialog.component';
 import { ExecutionListComponent } from './executions/execution-list/execution-list.component';
 import { JobHistoryComponent } from './history/job-history/job-history.component';
+import { TriggerFormComponent } from './triggers/trigger-form/trigger-form.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { JobHistoryComponent } from './history/job-history/job-history.component
     JobFormComponent,
     ConfirmationDialogComponent,
     ExecutionListComponent,
-    JobHistoryComponent
+    JobHistoryComponent,
+    TriggerFormComponent
   ],
   imports: [
     BrowserModule,
