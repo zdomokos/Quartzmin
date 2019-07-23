@@ -1,18 +1,9 @@
-{{!<Layout}}
-{{#if Model.Job.IsNew}}
-{{ViewBag Title='Add Job'}}
-{{else}}
-{{ViewBag Title='Edit Job'}}
-{{/if}}
-
 <div class="ui inverted page dimmer" id="dimmer"><div class="ui loader"></div></div>
-<form class="ui form" id="form" method="post" enctype="multipart/form-data">
-  <div class="ui clearing basic segment" style="padding: 0px" id="header">
+<form class="ui form" [formGroup]="form">
+  <div class="ui clearing basic segment" style="padding: 0" id="header">
     <div style="float: right">
-      <a class="ui button" id="btn-discard" href="{{ActionUrl ''}}">Discard Changes</a>
-      {{#unless Model.Job.IsNew}}
-      <div class="negative ui button" id="btn-delete">Delete</div>
-      {{/unless}}
+      <a class="ui button" id="btn-discard" (click)="resetForm()">Discard Changes</a>
+      <div *ngIf="isEdit" class="negative ui button" id="btn-delete">Delete</div>
       <div class="ui buttons">
         <div class="ui primary button" id="btn-save">Save</div>
         <div class="ui floating dropdown icon primary button" id="save-dropdown">
@@ -24,58 +15,49 @@
       </div>
     </div>
     <h1 class="ui left floated header">
-      {{#if Model.Job.IsNew}}Add Job{{else}}Edit Job "{{Model.Job.JobName}}"{{/if}}
+      <ng-container *ngIf="isEdit; else newJob">Edit Job</ng-container>
+      <ng-template #newJob>Add Job</ng-template>
     </h1>
   </div>
 
   <div class="ui segment">
-    {{#with Model.Job}}
-    <input type="hidden" name="job[isNew]" value="{{IsNew}}" />
-    {{#unless IsNew}}
-    <input type="hidden" name="job[oldJobName]" value="{{JobName}}" />
-    <input type="hidden" name="job[oldGroup]" value="{{Group}}" />
-    {{/unless}}
     <div id="job-properties">
-
       <div class="two fields">
         <div class="field accept-error">
-          <label>Name</label>
-          <input type="text" name="job[jobName]" placeholder="Name" value="{{JobName}}" id="jobName" />
+          <label for="jobName">Name</label>
+          <input type="text" placeholder="Name" id="jobName" formControlName="name" />
         </div>
         <div class="field accept-error">
-          <label>Group</label>
-          <input type="hidden" value="{{Group}}" id="jobGroup" />
-          <select class="ui search selection dropdown allow-additions" name="job[group]">
+          <label for="jobGroup">Group</label>
+          <select id="jobGroup" class="ui search selection dropdown allow-additions" formControlName="group">
             <option value="">Group</option>
-            {{>DropdownOptions items=GroupList selected=Group}}
+            <option *ngFor="let jobGroup of jobGroups">{{jobGroup}}</option>
           </select>
         </div>
       </div>
 
       <div class="field accept-error">
-        <label>Class</label>
-        <input type="hidden" value="{{Type}}" id="jobType" />
-        <select class="ui search selection dropdown allow-additions" name="job[type]" id="jobTypeDropdown">
+        <label for="jobTypeDropdown">Class</label>
+        <select class="ui search selection dropdown allow-additions" id="jobTypeDropdown" formControlName="type">
           <option value="">Fully Qualified Type Name</option>
-          {{>DropdownOptions items=TypeList selected=Type}}
+          <option *ngFor="let jobType of jobTypes">{{jobType}}</option>
         </select>
       </div>
 
       <div class="field accept-error">
-        <label>Description</label>
-        <textarea rows="2" name="job[description]">{{Description}}</textarea>
+        <label for="jobDescription">Description</label>
+        <textarea id="jobDescription" rows="2" formControlName="description"></textarea>
       </div>
 
       <div class="field accept-error">
         <div class="ui checkbox">
-          <input name="job[recovery]" type="checkbox" value="True" {{Checked Recovery}} />
-          <label>Requests Recovery</label>
+          <input id="jobRecovery" type="checkbox" formControlName="recovery" />
+          <label for="jobRecovery">Requests Recovery</label>
         </div>
       </div>
     </div>
-    {{/with}}
     <h3 class="ui dividing header">Job Data Map</h3>
 
-    {{>JobDataMap Model.DataMap}}
+    <!-- {{>JobDataMap Model.DataMap}}-->
   </div>
 </form>

@@ -22,7 +22,9 @@
 
   <div class="ui statistic" style="background-color: #f0f0f0;">
     <div class="value">
-      <div style="height: 50px" class="dashboard-histogram">{{>Histogram History}}</div>
+      <div style="height: 50px" class="dashboard-histogram">
+        <!-- TODO  {{>Histogram History}} -->
+      </div>
     </div>
     <div class="label">Latest Activity</div>
   </div>
@@ -43,19 +45,19 @@
         <tbody>
         <tr>
           <td style="min-width: 220px">In Standby Mode</td>
-          <td>{{Upper MetaData.InStandbyMode}}</td>
+          <td>{{ data.InStandbyMode }}</td>
         </tr>
         <tr>
           <td>Running Since</td>
-          <td>{{RunningSince}} UTC</td>
+          <td>{{ data.RunningSince | date }} UTC</td>
         </tr>
         <tr>
           <td>Shutdown</td>
-          <td>{{Upper MetaData.Shutdown}}</td>
+          <td>{{ data.Shutdown }}</td>
         </tr>
         <tr>
           <td>Started</td>
-          <td>{{Upper MetaData.Started}}</td>
+          <td>{{ data.Started }}</td>
         </tr>
         </tbody>
       </table>
@@ -64,19 +66,19 @@
       <h3 class="ui dividing header">Actions</h3>
 
       <p style="margin-top: 1em">
-        {{#if MetaData.InStandbyMode}}
-        <button class="ui small button green" id="btn-start"><i class="play icon"></i>Start</button>
-        {{else}}
-        <button class="ui small button grey" id="btn-standby"><i class="stop icon"></i>Standby</button>
-        {{/if}}
+        <button *ngIf="data.InStandbyMode; else notStandByButton" class="ui small button green" id="btn-start"><i class="play icon"></i>Start</button>
+        <ng-template #notStandByButton>
+          <button class="ui small button grey" id="btn-standby"><i class="stop icon"></i>Standby</button>
+        </ng-template>
         <button class="ui small button red" id="btn-shutdown"><i class="power icon"></i>Shutdown</button>
         <button class="ui small button" id="btn-pause"><i class="pause icon"></i>Pause All</button>
         <button class="ui small button" id="btn-resume"><i class="play icon"></i>Resume All</button>
       </p>
 
+      <!--
       {{>GroupActions items=JobGroups id='job-groups' header='Job Groups'}}
       {{>GroupActions items=TriggerGroups id='trigger-groups' header='Trigger Groups'}}
-
+      -->
     </div>
   </div>
 
@@ -85,31 +87,31 @@
     <tbody>
     <tr>
       <td style="min-width: 220px">Machine Name</td>
-      <td>{{MachineName}}</td>
+      <td>{{ data.MachineName }}</td>
     </tr>
     <tr>
       <td>Application</td>
-      <td>{{Application}}</td>
+      <td>{{ data.Application }}</td>
     </tr>
     <tr>
       <td>Scheduler Name</td>
-      <td>{{MetaData.SchedulerName}}</td>
+      <td>{{ data.SchedulerName }}</td>
     </tr>
     <tr>
       <td>Scheduler Instance Id</td>
-      <td>{{MetaData.SchedulerInstanceId}}</td>
+      <td>{{ data.SchedulerInstanceId }}</td>
     </tr>
     <tr>
       <td>Scheduler Remote</td>
-      <td>{{Upper MetaData.SchedulerRemote}}</td>
+      <td>{{ data.SchedulerRemote }}</td>
     </tr>
     <tr>
       <td>Scheduler Type</td>
-      <td>{{MetaData.SchedulerType.AssemblyQualifiedName}}</td>
+      <td>{{ data.SchedulerType.AssemblyQualifiedName}}</td>
     </tr>
     <tr>
       <td>Version</td>
-      <td>{{MetaData.Version}}</td>
+      <td>{{ data.Version }}</td>
     </tr>
     </tbody>
   </table>
@@ -119,15 +121,15 @@
     <tbody>
     <tr>
       <td style="min-width: 220px">Job Store Clustered</td>
-      <td>{{Upper MetaData.JobStoreClustered}}</td>
+      <td>{{ data.JobStoreClustered }}</td>
     </tr>
     <tr>
       <td>Job Store Supports Persistence</td>
-      <td>{{Upper MetaData.JobStoreSupportsPersistence}}</td>
+      <td>{{ data.JobStoreSupportsPersistence }}</td>
     </tr>
     <tr>
       <td>Job Store Type</td>
-      <td>{{MetaData.JobStoreType.AssemblyQualifiedName}}</td>
+      <td>{{ data.JobStoreType.AssemblyQualifiedName }}</td>
     </tr>
     </tbody>
   </table>
@@ -137,11 +139,11 @@
     <tbody>
     <tr>
       <td style="min-width: 220px">Thread Pool Size</td>
-      <td>{{MetaData.ThreadPoolSize}}</td>
+      <td>{{ data.ThreadPoolSize }}</td>
     </tr>
     <tr>
       <td>Thread Pool Type</td>
-      <td>{{MetaData.ThreadPoolType.AssemblyQualifiedName}}</td>
+      <td>{{ data.ThreadPoolType.AssemblyQualifiedName }}</td>
     </tr>
     </tbody>
   </table>
@@ -158,8 +160,6 @@
     <div class="ui cancel button">Cancel</div>
   </div>
 </div>
-
-{{/with}}
 
 <script>
   initHistogramTooltips($('.histogram > .bar'));

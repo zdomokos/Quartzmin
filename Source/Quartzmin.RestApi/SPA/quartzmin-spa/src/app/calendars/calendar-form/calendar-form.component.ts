@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./calendar-form.component.scss']
 })
 export class CalendarFormComponent implements OnInit {
+  isEdit;
 
   constructor() { }
 
