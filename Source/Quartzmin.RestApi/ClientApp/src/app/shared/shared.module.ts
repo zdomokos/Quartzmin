@@ -5,6 +5,7 @@ import { AsyncDataErrorComponent } from './async-data/async-data-error/async-dat
 import { AsyncDataSuccessComponent } from './async-data/async-data-success/async-data-success.component';
 import { AsyncDataLoadingComponent } from './async-data/async-data-loading/async-data-loading.component';
 import { DatePipe } from './pipes/date.pipe';
+import { DefaultPipe } from './pipes/default.pipe';
 
 export const declareAndExport = [
   AsyncDataWrapperComponent,
@@ -17,11 +18,13 @@ export const declareAndExport = [
 @NgModule({
   declarations: [
     ...declareAndExport,
-    DatePipe
+    DatePipe,
+    DefaultPipe
   ],
   exports: [
     ...declareAndExport,
-    DatePipe
+    DatePipe,
+    DefaultPipe
   ],
   imports: [
     CommonModule
