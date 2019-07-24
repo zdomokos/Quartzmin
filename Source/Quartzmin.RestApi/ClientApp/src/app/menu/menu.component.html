@@ -1,14 +1,12 @@
 <div class="ui top inverted stackable menu main-menu">
-  <div class="ui container">
+  <nav class="ui container">
     <div class="ui header item">
       <img class="logo" src="assets/images/logo.png">Quartzmin
     </div>
 
-    <nav>
-      <ng-container *ngFor="let item of menuItems">
-        <a [routerLink]="item.route">{{ item.name }}</a>
-      </ng-container>
-    </nav>
+    <ng-container *ngFor="let item of menuItems">
+      <a [routerLink]="item.route" class="item" [routerLinkActive]="'active'">{{ item.name }}</a>
+    </ng-container>
 
     <!--
     <div class="right menu">
@@ -22,5 +20,5 @@
         </div>
     </div>
     -->
-  </div>
+  </nav>
 </div>

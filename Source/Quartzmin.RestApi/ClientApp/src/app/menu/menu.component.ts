@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
   menuItems = [
-    { name: 'Overview', route: '/' },
+    { name: 'Overview', route: 'dashboard' },
     { name: 'Jobs', route: 'jobs' },
     { name: 'Triggers', route: 'triggers' },
     { name: 'Executions', route: 'executions' },
