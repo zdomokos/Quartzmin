@@ -1,5 +1,5 @@
 import { Observable, of } from 'rxjs';
-import { catchError, map, startWith, switchMap } from 'rxjs/operators';
+import { catchError, map, startWith } from 'rxjs/operators';
 
 export interface CommonData {
   state: string;
@@ -27,7 +27,7 @@ export interface ErrorData<E> extends CommonData {
   error: E;
 }
 
-export type AsyncData<T, E> = LoadingData | CompleteData<T> | ErrorData<E>;
+export type AsyncData<T, E = string> = LoadingData | CompleteData<T> | ErrorData<E>;
 
 export const LoadingState: LoadingData = Object.freeze({ state: 'loading', loading: true, failed: false, data: null }) as any;
 
@@ -49,12 +49,10 @@ function wrapError<E>(error: E): ErrorData<E> {
   };
 }
 
-export function getAsyncData<T, E>(observable: Observable<T>): Observable<AsyncData<T, E>> {
-  return of().pipe(
-    startWith(() => LoadingState),
-    switchMap(() => observable.pipe(
-      map(data => wrapData(data)),
-      catchError(error => of(wrapError(error)))
-    ))
+export function getAsyncData<T, E = string>(observable: Observable<T>): Observable<AsyncData<T, E>> {
+  return observable.pipe(
+    map(data => wrapData(data)),
+    catchError(error => of(wrapError(error))),
+    startWith(LoadingState)
   );
 }
