@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using Quartz;
 using Quartz.Impl.Matchers;
 using Microsoft.AspNetCore.Http;
+using System.Linq;
+using Quartz.Plugins.RecentHistory;
 
 namespace Quartzmin.RestApi.Controllers
 {
@@ -41,7 +43,31 @@ namespace Quartzmin.RestApi.Controllers
         {
             var jobKeys = await this._scheduler.GetJobKeys(GroupMatcher<JobKey>.AnyGroup());
 
-            return Ok(jobKeys);
+            var asyncJobs = jobKeys.Select(async key => 
+            {
+                var detail = await GetJobDetail(key.Name, key.Group);
+
+                var triggers = await this._scheduler.GetTriggersOfJob(key);
+                var nextFires = triggers.Select(x => x.GetNextFireTimeUtc()?.UtcDateTime).ToArray();
+                Dictionary<string, ExecutionHistoryEntry> historyByJob = await GetJobHistory();
+
+                return new
+                {
+                    name = key.Name,
+                    group = key.Group,
+                    concurrent = !detail.ConcurrentExecutionDisallowed,
+                    persist = detail.PersistJobDataAfterExecution,
+                    recovery = detail.RequestsRecovery,
+                    type = detail.JobType.FullName,
+                    description = detail.Description,
+                    History = historyByJob?.GetValueOrDefault(key.ToString(), null), //.ToHistogram(),
+                    NextFireTime = nextFires.Where(x => x != null).OrderBy(x => x).FirstOrDefault()
+                };
+            });
+
+            var jobTuples = await Task.WhenAll(asyncJobs);
+
+            return Ok(jobTuples);
         }
 
         [HttpGet("{name}")]
@@ -116,6 +142,20 @@ namespace Quartzmin.RestApi.Controllers
             IJobDetail detail = await this._scheduler.GetJobDetail(key);
 
             return detail;
+        }
+
+        private async Task<Dictionary<string, ExecutionHistoryEntry>> GetJobHistory()
+        {
+            var store = this._scheduler.Context.GetExecutionHistoryStore();
+            if (store == null)
+            {
+                return null;
+            }
+
+            var history = await store.FilterLastOfEveryJob(10);
+            var historyByJob = history.ToDictionary(x => x.Job);
+
+            return historyByJob;
         }
     }
 }
