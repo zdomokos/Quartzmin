@@ -1,17 +1,21 @@
 <div class="ui inverted page dimmer" id="dimmer"><div class="ui loader"></div></div>
-<form class="ui form" [formGroup]="form">
+<form class="ui form" [formGroup]="form" (ngSubmit)="submitForm()">
   <div class="ui clearing basic segment" style="padding: 0" id="header">
     <div style="float: right">
       <a class="ui button" id="btn-discard" (click)="resetForm()">Discard Changes</a>
       <div *ngIf="isEdit" class="negative ui button" id="btn-delete">Delete</div>
       <div class="ui buttons">
-        <div class="ui primary button" id="btn-save">Save</div>
-        <div class="ui floating dropdown icon primary button" id="save-dropdown">
+        <button class="ui primary button" id="btn-save">Save</button>
+        <button class="ui floating dropdown icon primary button" id="save-dropdown" [matMenuTriggerFor]="saveMenu">
           <i class="dropdown icon"></i>
+        </button>
+        <mat-menu #saveMenu="matMenu">
           <div class="menu">
-            <div class="item ui basic button" id="btn-trigger"><i class="green play icon"></i> Save &amp; Trigger Immediately</div>
+            <button type="button" class="item ui basic button" id="btn-trigger">
+              <i class="green play icon"></i> Save &amp; Trigger Immediately
+            </button>
           </div>
-        </div>
+        </mat-menu>
       </div>
     </div>
     <h1 class="ui left floated header">
@@ -29,19 +33,22 @@
         </div>
         <div class="field accept-error">
           <label for="jobGroup">Group</label>
-          <select id="jobGroup" class="ui search selection dropdown allow-additions" formControlName="group">
-            <option value="">Group</option>
-            <option *ngFor="let jobGroup of jobGroups">{{jobGroup}}</option>
-          </select>
+          <mat-select id="jobGroup" formControlName="group">
+            <mat-option [value]="null">None</mat-option>
+            <mat-option *ngFor="let jobGroup of jobGroups" [value]="jobGroup">
+              {{ jobGroup }}
+            </mat-option>
+          </mat-select>
         </div>
       </div>
 
       <div class="field accept-error">
         <label for="jobTypeDropdown">Class</label>
-        <select class="ui search selection dropdown allow-additions" id="jobTypeDropdown" formControlName="type">
-          <option value="">Fully Qualified Type Name</option>
-          <option *ngFor="let jobType of jobTypes">{{jobType}}</option>
-        </select>
+        <mat-select id="jobTypeDropdown" formControlName="type">
+          <mat-option *ngFor="let jobType of jobTypes" [value]="jobType">
+            {{ jobType }}
+          </mat-option>
+        </mat-select>
       </div>
 
       <div class="field accept-error">
@@ -56,8 +63,8 @@
         </div>
       </div>
     </div>
-    <h3 class="ui dividing header">Job Data Map</h3>
 
-    <!-- {{>JobDataMap Model.DataMap}}-->
+    <h3 class="ui dividing header">Job Data Map</h3>
+    <app-job-data-map [form]="form"></app-job-data-map>
   </div>
 </form>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormGroup} from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-job-form',
@@ -7,19 +7,39 @@ import {FormGroup} from "@angular/forms";
   styleUrls: ['./job-form.component.scss']
 })
 export class JobFormComponent implements OnInit {
-  form: FormGroup;
+  form: FormGroup = this.fb.group({
+    name: ['', Validators.required],
+    group: [''],
+    type: ['', Validators.required],
+    description: [''],
+    recovery: [false],
+    dataMap: this.fb.array([])
+  });
 
   isEdit = false;
 
   jobTypes: any[];
   jobGroups: any[];
 
-  constructor() { }
+  constructor(private fb: FormBuilder) {
+  }
 
   ngOnInit() {
   }
 
-  resetForm() {
+  submitForm() {
+    if (!this.form.valid) {
+      return;
+    }
 
+    console.log(this.form.value);
+  }
+
+  submitAndTrigger() {
+
+  }
+
+  resetForm() {
+    this.form.reset();
   }
 }

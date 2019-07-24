@@ -381,3 +381,6 @@ table#history-list > tbody > tr:not(.error-row):hover,
 table#history-list > tbody > tr:hover + tr.error-row {
   background-color: #f4f4f4;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
