@@ -35,37 +35,41 @@
     <th>History</th>
   </tr>
   </thead>
-  <tbody>
-    <ng-container *ngFor="let trigger of triggers">
-      <ng-container *ngIf="jobSeparator">
-        <tr class="job-key">
-          <td class="job-name">
-            <a [routerLink]="['jobs', job.group, job.name, 'edit']">{{ job }}</a>
-          </td>
-          <td class="job-group">{{ job.group }}</td>
-          <td colspan="6" style="text-align: right">
-            <a (click)="pauseAll()" class="ui super tiny button btn-pause-all"><i class="pause icon"></i>Pause All</a>
-            <a (click)="resumeAll()" class="ui super tiny button btn-resume-all"><i class="play icon"></i>Resume All</a>
-          </td>
-        </tr>
-      </ng-container>
+  <tbody app-async-data-wrapper [data]="triggers$ | async">
+    <app-async-data-success>
+      <ng-template let-triggers>
+        <ng-container *ngFor="let trigger of triggers">
+          <ng-container *ngIf="jobSeparator">
+            <tr class="job-key">
+              <td class="job-name">
+                <a [routerLink]="['jobs', job.group, job.name, 'edit']">{{ job }}</a>
+              </td>
+              <td class="job-group">{{ job.group }}</td>
+              <td colspan="6" style="text-align: right">
+                <a (click)="pauseAll()" class="ui super tiny button btn-pause-all"><i class="pause icon"></i>Pause All</a>
+                <a (click)="resumeAll()" class="ui super tiny button btn-resume-all"><i class="play icon"></i>Resume All</a>
+              </td>
+            </tr>
+          </ng-container>
 
-      <tr>
-        <td class="trigger-name">
-          <i *ngIf="trigger.isPaused" class="small pause icon" title="Paused"></i>
-          <a [routerLink]="['triggers', trigger.group, trigger.name, 'edit']" title="{{ trigger.description }}">{{ trigger.name }}</a>
-        </td>
-        <td class="trigger-group">{{ trigger.group }}</td>
-        <td class="schedule-desc" data-content="{{ScheduleDescription}}">
-          <i class="{{TypeIcon}} icon"></i>{{TypeString}}
-        </td>
-        <td class="trigger-start">{{ trigger.startTime | date }}</td>
-        <td class="trigger-end">{{ trigger.endTime | date }}</td>
-        <td class="trigger-last-fire">{{ trigger.lastFireTime | date }}</td>
-        <td class="trigger-next-fire">{{ trigger.nextFireTime | date }}</td>
-        <td class="trigger-histogram"><app-histogram></app-histogram></td>
-      </tr>
-    </ng-container>
+          <tr>
+            <td class="trigger-name">
+              <i *ngIf="trigger.isPaused" class="small pause icon" title="Paused"></i>
+              <a [routerLink]="['triggers', trigger.group, trigger.name, 'edit']" title="{{ trigger.description }}">{{ trigger.name }}</a>
+            </td>
+            <td class="trigger-group">{{ trigger.group }}</td>
+            <td class="schedule-desc"> <!--  data-content="{{ScheduleDescription}}" -->
+              <i class="{{TypeIcon}} icon"></i>{{TypeString}}
+            </td>
+            <td class="trigger-start">{{ trigger.startTime | appDate | appDefault: 'N/A' }}</td>
+            <td class="trigger-end">{{ trigger.endTime | appDate | appDefault: 'N/A'  }}</td>
+            <td class="trigger-last-fire">{{ trigger.lastFireTime | appDate | appDefault: 'N/A'  }}</td>
+            <td class="trigger-next-fire">{{ trigger.nextFireTime | appDate | appDefault: 'N/A'  }}</td>
+            <td class="trigger-histogram"><app-histogram></app-histogram></td>
+          </tr>
+        </ng-container>
+      </ng-template>
+    </app-async-data-success>
   </tbody>
 </table>
 
@@ -82,9 +86,16 @@
 <ng-container *ngIf="triggers$ | async as triggers">
 <app-async-data-wrapper [data]="triggers">
   <app-async-data-success>
-
+    <ng-template let-data>
+      Success
+      {{ data | json }}
+    </ng-template>
   </app-async-data-success>
   <app-async-data-error>
-    {{ triggers.error }}
+    <ng-template let-error>
+      Error
+      {{ error  | json }}
+    </ng-template>
   </app-async-data-error>
 </app-async-data-wrapper>
+</ng-container>
