@@ -75,7 +75,39 @@
         <button class="ui small button" id="btn-resume" (click)="resumeAll()"><i class="play icon"></i>Resume All</button>
       </div>
 
+      <app-group-actions
+        header="Job Groups"
+        [groups]="jobGroups$ | async">
+      </app-group-actions>
+
+      <app-group-actions
+        header="Trigger Groups"
+        [groups]="jobGroups$ | async">
+      </app-group-actions>
+
+
       <!--
+
+      <div class="group-actions" id="job-groups">
+        <h4 class="ui dividing header">Job Groups</h4>
+        <ul>
+          <li *ngFor="let group of jobGroups$ | async" class="resumed">
+            {{ group }}
+            <button class="ui super tiny button"><i class="pause icon"></i>Pause</button>
+          </li>
+        </ul>
+      </div>
+
+
+      <div class="group-actions" id="trigger-groups">
+        <h4 class="ui dividing header">Trigger Groups</h4>
+        <ul>
+          <li *ngFor="let triggerGroup of jobGroups$ | async" class="paused">
+            {{ triggerGroup }}
+            <button class="ui super tiny button"><i class="play icon"></i>Resume</button>
+          </li>
+        </ul>
+      </div>
       {{>GroupActions items=JobGroups id='job-groups' header='Job Groups'}}
       {{>GroupActions items=TriggerGroups id='trigger-groups' header='Trigger Groups'}}
       -->
