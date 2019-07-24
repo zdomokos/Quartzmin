@@ -313,39 +313,6 @@ tr.job-key a > span.group {
   transform: translateY(50%) translateX(50%);
 }
 
-#scheduler-dashboard .ui.statistic {
-  padding: 10px;
-  border-radius: 4px;
-  box-shadow: 1px 2px 4px rgba(0,0,0,0.15);
-}
-
-#scheduler-dashboard .ui.inverted.statistic {
-  text-shadow: 1px 2px 4px rgba(0,0,0,0.25);
-}
-
-.dashboard-histogram .histogram {
-  height: 100%;
-}
-
-.dashboard-histogram {
-  display: inline-flex;
-}
-
-.dashboard-histogram .histogram > .bar {
-  width: 13px;
-}
-
-#scheduler-dashboard .ui.table{
-  width: auto;
-}
-
-#scheduler-dashboard .ui.table>tbody>tr>td:nth-child(2) {
-  font-weight: bold;
-}
-
-#scheduler-dashboard .ui.table {
-  border: none;
-}
 
 .inline-stats {
   font-size: 1em;
@@ -360,83 +327,11 @@ tr.job-key a > span.group {
 
 }
 
-#scheduler-dashboard .ui.dividing.header {
-  margin-bottom: 0px;
-}
-
-#scheduler-dashboard .ui.table {
-  margin-top: 5px;
-}
-
-@media only screen and (max-width: 767px) {
-  #scheduler-dashboard .ui.table:not(.unstackable) td:first-child, .ui.table:not(.unstackable) th:first-child {
-    font-weight: normal;
-  }
-}
-
-#scheduler-dashboard > .ui.grid {
-  margin: 0px;
-}
-
-#scheduler-dashboard > .ui.grid > .column {
-  padding: 14px 0px 0px !important;
-}
-
-#scheduler-dashboard #msg-panel:not(:empty) {
-  margin-top: 0px;
-  margin-bottom: 15px;
-}
 
 .trigger-name .pause.icon {
   color: #e6b800;
 }
 
-#scheduler-dashboard #col-actions .ui.button {
-  margin-bottom: 5px;
-}
-
-#scheduler-dashboard .group-actions {
-  float: left;
-  margin-right: 10px;
-}
-
-
-#scheduler-dashboard .group-actions ul {
-  margin: 5px 0px;
-  list-style:none;
-  padding-left: 16px;
-}
-
-#scheduler-dashboard .group-actions li {
-  clear: both;
-  margin: 0px;
-  padding: 0px;
-}
-
-#scheduler-dashboard .group-actions li .ui.button {
-  margin: 0px 4px;
-  float: right;
-}
-
-#scheduler-dashboard .group-actions li.paused:before,
-#scheduler-dashboard .group-actions li.resumed:before {
-  position: absolute;
-  font-size: 11px;
-  font-family: Icons;
-  font-style: normal;
-  margin-left: -1.2em;
-  margin-top: 0.1em;
-}
-
-#scheduler-dashboard .group-actions li.paused:before {
-  content: "\f04c";
-  color: #e6b800;
-}
-
-#scheduler-dashboard .group-actions li.resumed:before {
-  content: "\f111";
-  color: #21ba45;
-}
 
 input[type=text].stats {
   font-style: italic;

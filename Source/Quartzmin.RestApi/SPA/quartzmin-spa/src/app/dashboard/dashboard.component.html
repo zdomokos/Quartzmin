@@ -1,35 +1,35 @@
 <div class="ui inverted page dimmer" id="dimmer"><div class="ui loader"></div></div>
 
-<div id="scheduler-dashboard" *ngIf="(data$ | async) as data">
+<div class="dashboard" id="scheduler-dashboard" *ngIf="(data$ | async) as data">
   <div id="msg-panel"></div>
 
   <h3 class="ui dividing header" style="margin-top: 0">Overview</h3>
 
-  <div class="ui inverted statistic" style="background-color: #0c5a0c; background-image: linear-gradient(#107c10, #0c5a0c);">
+  <div class="ui inverted statistic statistics-executed">
     <div class="value"><i class="small check icon"></i> {{ data.ExecutedJobs }}</div>
     <div class="label">Jobs executed</div>
   </div>
 
-  <div class="ui inverted statistic" style="background-color: #c42121; background-image: linear-gradient(#db2828, #c42121);">
+  <div class="ui inverted statistic statistics-failed">
     <div class="value"><i class="small close icon"></i> {{ data.FailedJobs }}</div>
     <div class="label">Jobs failed</div>
   </div>
 
-  <div class="ui inverted statistic" style="background-color: #1c70b0; background-image: linear-gradient(#2185d0, #1c70b0);">
+  <div class="ui inverted statistic statistics-running">
     <div class="value"><i class="small play icon"></i> {{ data.ExecutingJobs }}</div>
     <div class="label">Jobs executing</div>
   </div>
 
-  <div class="ui statistic" style="background-color: #f0f0f0;">
+  <div class="ui statistic statistics-histogram">
     <div class="value">
-      <div style="height: 50px" class="dashboard-histogram">
+      <div class="dashboard-histogram">
         <!-- TODO  {{>Histogram History}} -->
       </div>
     </div>
     <div class="label">Latest Activity</div>
   </div>
 
-  <div class="ui statistic" style="box-shadow: none">
+  <div class="ui statistic statistics--no-shadow">
     <div class="inline-stats">
       <span>{{ data.JobsCount }}</span> jobs<br>
       <span>{{ data.TriggerCount }}</span> triggers

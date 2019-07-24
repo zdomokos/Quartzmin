@@ -1,0 +1,136 @@
+#scheduler-dashboard .ui.dividing.header {
+  margin-bottom: 0;
+}
+
+#scheduler-dashboard .ui.table {
+  margin-top: 5px;
+}
+
+@media only screen and (max-width: 767px) {
+  #scheduler-dashboard .ui.table:not(.unstackable) td:first-child, .ui.table:not(.unstackable) th:first-child {
+    font-weight: normal;
+  }
+}
+
+#scheduler-dashboard > .ui.grid {
+  margin: 0;
+}
+
+#scheduler-dashboard > .ui.grid > .column {
+  padding: 14px 0 0 !important;
+}
+
+#scheduler-dashboard #msg-panel:not(:empty) {
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+#scheduler-dashboard #col-actions .ui.button {
+  margin-bottom: 5px;
+}
+
+#scheduler-dashboard .group-actions {
+  float: left;
+  margin-right: 10px;
+}
+
+
+#scheduler-dashboard .group-actions ul {
+  margin: 5px 0;
+  list-style:none;
+  padding-left: 16px;
+}
+
+#scheduler-dashboard .group-actions li {
+  clear: both;
+  margin: 0;
+  padding: 0;
+}
+
+#scheduler-dashboard .group-actions li .ui.button {
+  margin: 0 4px;
+  float: right;
+}
+
+#scheduler-dashboard .group-actions li.paused:before,
+#scheduler-dashboard .group-actions li.resumed:before {
+  position: absolute;
+  font-size: 11px;
+  font-family: Icons;
+  font-style: normal;
+  margin-left: -1.2em;
+  margin-top: 0.1em;
+}
+
+#scheduler-dashboard .group-actions li.paused:before {
+  content: "\f04c";
+  color: #e6b800;
+}
+
+#scheduler-dashboard .group-actions li.resumed:before {
+  content: "\f111";
+  color: #21ba45;
+}
+
+
+#scheduler-dashboard .ui.statistic {
+  padding: 10px;
+  border-radius: 4px;
+  box-shadow: 1px 2px 4px rgba(0,0,0,0.15);
+}
+
+#scheduler-dashboard .ui.inverted.statistic {
+  text-shadow: 1px 2px 4px rgba(0,0,0,0.25);
+}
+
+.dashboard-histogram .histogram {
+  height: 100%;
+}
+
+.dashboard-histogram {
+  display: inline-flex;
+}
+
+.dashboard-histogram .histogram > .bar {
+  width: 13px;
+}
+
+#scheduler-dashboard .ui.table{
+  width: auto;
+}
+
+#scheduler-dashboard .ui.table>tbody>tr>td:nth-child(2) {
+  font-weight: bold;
+}
+
+#scheduler-dashboard .ui.table {
+  border: none;
+}
+
+
+.statistics-executed {
+  background-color: #0c5a0c;
+  background-image: linear-gradient(#107c10, #0c5a0c);
+}
+
+.statistics-failed {
+  background-color: #c42121;
+  background-image: linear-gradient(#db2828, #c42121);
+}
+
+.statistics-running {
+  background-color: #1c70b0;
+  background-image: linear-gradient(#2185d0, #1c70b0);
+}
+
+.statistics-histogram {
+  background-color: #f0f0f0;
+}
+
+.dashboard-histogram {
+  height: 50px;
+}
+
+.statistics--no-shadow {
+  box-shadow: none;
+}
