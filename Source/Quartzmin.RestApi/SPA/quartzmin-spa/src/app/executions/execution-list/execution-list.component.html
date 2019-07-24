@@ -1,38 +1,43 @@
-<div class="ui inverted page dimmer" id="dimmer"><div class="ui loader"></div></div>
+<ng-container *ngIf="executions$ | async as executions">
+  <div class="ui inverted page dimmer" id="dimmer"><div class="ui loader"></div></div>
 
-<div id="msg-panel"></div>
+  <div id="msg-panel"></div>
 
-<table class="ui single line table highlight-rows" id="execution-list">
-  <thead>
-    <tr>
-      <th>Job</th>
-      <th>Trigger</th>
-      <th>Scheduled Fire Time</th>
-      <th>Actual Fire Time</th>
-      <th>Run Time</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let execution of []">
-      <td>
-        <a [routerLink]="['/jobs', execution.JobGroup, execution.JobName, 'edit']">
-          {{ execution.JobGroup }}.{{ execution.JobName }}
-        </a>
-      </td>
-      <td>
-        <a [routerLink]="['/triggers', execution.TriggerGroup, execution.TriggerName, 'edit']">
-          {{ execution.TriggerGroup }}.{{ execution.TriggerName }}
-        </a>
-      </td>
-      <td>{{ execution.ScheduledFireTime }}</td>
-      <td>{{ execution.ActualFireTime }}</td>
-      <td>{{ execution.RunTime }}</td>
-      <td style="text-align: right">
-        <button class="ui super tiny red button btn-interrupt" (click)="interrupt(execution)">
-          <i class="stop icon"></i>Interrupt
-        </button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+  <table class="ui single line table highlight-rows">
+    <thead>
+      <tr>
+        <th>Job</th>
+        <th>Trigger</th>
+        <th>Scheduled Fire Time</th>
+        <th>Actual Fire Time</th>
+        <th>Run Time</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngIf="executions.loading">
+        <td colspan="6">Loading...</td>
+      </tr>
+      <tr *ngFor="let execution of executions.data">
+        <td>
+          <a [routerLink]="['/jobs', execution.job.group, execution.job.name, 'edit']">
+            {{ execution.job.group }}.{{ execution.job.name }}
+          </a>
+        </td>
+        <td>
+          <a [routerLink]="['/triggers', execution.trigger.group, execution.trigger.name, 'edit']">
+            {{ execution.trigger.group }}.{{ execution.trigger.name }}
+          </a>
+        </td>
+        <td>{{ execution.scheduledFireTime }}</td>
+        <td>{{ execution.actualFireTime }}</td>
+        <td>{{ execution.runTime }}</td>
+        <td class="interrupt">
+          <button class="ui super tiny red button btn-interrupt" (click)="interrupt(execution)">
+            <i class="stop icon"></i>Interrupt
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</ng-container>
