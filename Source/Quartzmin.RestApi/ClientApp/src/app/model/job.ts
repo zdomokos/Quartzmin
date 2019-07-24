@@ -6,4 +6,6 @@ export interface Job extends NameGroupPair {
   persist: boolean;
   recovery: boolean;
   concurrent: boolean;
+  history: any[];
+  nextFireTime: Date;
 }
