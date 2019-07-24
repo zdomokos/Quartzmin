@@ -1,10 +1,18 @@
 <ng-container [ngSwitch]="data.state">
   <ng-container *ngSwitchCase="'loading'">
+    <ng-container *ngTemplateOutlet="loadingComponent?.loadingTemplate ? loadingComponent.loadingTemplate : defaultLoading"></ng-container>
   </ng-container>
   <ng-container *ngSwitchCase="'error'">
-
+    <ng-container *ngTemplateOutlet="errorComponent?.errorTemplate ? errorComponent.errorTemplate : defaultError; context: { $implicit: data.error }"></ng-container>
   </ng-container>
   <ng-container *ngSwitchCase="'complete'">
-
+    <ng-container *ngTemplateOutlet="successComponent.successTemplate; context: { $implicit: data.data }"></ng-container>
   </ng-container>
 </ng-container>
+
+<ng-template #defaultLoading>
+  Loading...
+</ng-template>
+<ng-template #defaultError>
+  Error!
+</ng-template>

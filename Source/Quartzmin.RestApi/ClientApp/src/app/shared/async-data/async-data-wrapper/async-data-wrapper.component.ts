@@ -5,7 +5,7 @@ import { AsyncDataLoadingComponent } from '../async-data-loading/async-data-load
 import { AsyncDataSuccessComponent } from '../async-data-success/async-data-success.component';
 
 @Component({
-  selector: 'app-async-data-wrapper',
+  selector: 'app-async-data-wrapper, [app-async-data-wrapper]',
   templateUrl: './async-data-wrapper.component.html',
   styleUrls: ['./async-data-wrapper.component.scss']
 })
@@ -13,14 +13,14 @@ export class AsyncDataWrapperComponent<T, E> implements OnInit, AfterContentInit
   @Input()
   data: AsyncData<T, E>;
 
-  @ContentChild(AsyncDataErrorComponent, { static: true })
-  errorComponent;
+  @ContentChild(AsyncDataErrorComponent, { static: false })
+  errorComponent: AsyncDataErrorComponent;
 
-  @ContentChild(AsyncDataLoadingComponent, { static: true })
-  loadingComponent;
+  @ContentChild(AsyncDataLoadingComponent, { static: false })
+  loadingComponent: AsyncDataLoadingComponent;
 
-  @ContentChild(AsyncDataSuccessComponent, { static: true })
-  successComponent;
+  @ContentChild(AsyncDataSuccessComponent, { static: false })
+  successComponent: AsyncDataSuccessComponent;
 
   constructor() { }
 

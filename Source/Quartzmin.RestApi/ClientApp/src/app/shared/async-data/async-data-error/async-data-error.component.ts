@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ContentChild, OnInit, TemplateRef } from '@angular/core';
 
 @Component({
   selector: 'app-async-data-error',
@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./async-data-error.component.scss']
 })
 export class AsyncDataErrorComponent implements OnInit {
-  data: any;
+  @ContentChild(TemplateRef, {static: false})
+  errorTemplate: TemplateRef<any>;
 
   constructor() { }
 
