@@ -22,6 +22,10 @@ import { JobDataMapComponent } from './jobs/job-form/job-data-map/job-data-map.c
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatMenuModule, MatSelectModule } from '@angular/material';
 import { SharedModule } from './shared/shared.module';
+import { EmptyPageComponent } from './empty-page/empty-page.component';
+import { LoaderComponent } from './loader/loader.component';
+import { HistogramTooltipComponent } from './histogram/histogram-tooltip/histogram-tooltip.component';
+import { GroupActionsComponent } from './dashboard/group-actions/group-actions.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +43,11 @@ import { SharedModule } from './shared/shared.module';
     TriggerFormComponent,
     MenuComponent,
     FooterComponent,
-    JobDataMapComponent
+    JobDataMapComponent,
+    EmptyPageComponent,
+    LoaderComponent,
+    HistogramTooltipComponent,
+    GroupActionsComponent
   ],
   imports: [
     BrowserModule,

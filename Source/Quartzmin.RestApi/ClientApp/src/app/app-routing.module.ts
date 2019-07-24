@@ -11,7 +11,8 @@ import { CalendarFormComponent } from './calendars/calendar-form/calendar-form.c
 import { TriggerFormComponent } from './triggers/trigger-form/trigger-form.component';
 
 const routes: Routes = [
-  {path: '', component: DashboardComponent},
+  {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
+  {path: 'dashboard', component: DashboardComponent},
   {
     path: 'jobs', children: [
       {path: '', component: JobListComponent},
@@ -38,7 +39,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {useHash: true})],
   exports: [RouterModule]
 })
 export class AppRoutingModule {
