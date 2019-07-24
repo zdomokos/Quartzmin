@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {Observable} from 'rxjs';
+import { Observable } from 'rxjs';
+
 import { JobService } from '../job.service';
 import { AsyncData, getAsyncData } from '../../utils/async-data';
-import { Job } from '../job';
+import { Job } from '../../model/job';
 
 @Component({
   selector: 'app-job-list',
@@ -12,7 +13,8 @@ import { Job } from '../job';
 export class JobListComponent implements OnInit {
   jobs$: Observable<AsyncData<Job[], any>>;
 
-  constructor(private service: JobService) { }
+  constructor(private service: JobService) {
+  }
 
   ngOnInit() {
     this.jobs$ = getAsyncData(this.service.getAll());

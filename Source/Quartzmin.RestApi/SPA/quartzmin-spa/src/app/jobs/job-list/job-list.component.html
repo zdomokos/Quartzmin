@@ -17,7 +17,7 @@
       <div class="item" *ngFor="let group of []">{{ group }}</div>
     </div>
   </div>
-  <a class="ui right floated primary button" (click)="null">
+  <a class="ui right floated primary button" [routerLink]="'/jobs/create'">
     <i class="plus icon"></i>New
   </a>
 
@@ -35,45 +35,37 @@
     </tr>
     </thead>
     <tbody>
-    <ng-container [ngSwitch]="data.state">
-      <ng-container *ngSwitchCase="'loading'">
-        <tr>
-          <td colspan="5">Loading...</td>
-        </tr>
+      <ng-container [ngSwitch]="data.state">
+        <ng-container *ngSwitchCase="'loading'">
+          <tr>
+            <td colspan="5">Loading...</td>
+          </tr>
+        </ng-container>
+        <ng-container *ngSwitchCase="'error'">
+          <tr>
+            <td colspan="5">Error: {{ data.error }}</td>
+          </tr>
+        </ng-container>
+        <ng-container *ngSwitchCase="'complete'">
+          <tr *ngFor="let job of data.data">
+            <td class="job-name">
+              <a [routerLink]="[job.groupName, job.jobName]" title="{{ job.description }}">{{ job.jobName }}</a>
+              <button class="ui icon mini detail button"><i class="dots icon"></i></button>
+            </td>
+            <td class="job-group">{{ job.groupName }}</td>
+            <td class="job-type">{{ job.type}}</td>
+            <td class="next-fire-time"></td>
+            <td class="job-histogram">
+              <app-histogram></app-histogram>
+            </td>
+            <td>
+              <div *ngIf="job.persist" class="ui mini green label" title="Persist Job Data">P</div>
+              <div *ngIf="job.recovery" class="ui mini purple label" title="Request Recovery">R</div>
+              <div *ngIf="job.concurrent" class="ui mini orange label" title="Concurrent">C</div>
+            </td>
+          </tr>
+        </ng-container>
       </ng-container>
-      <ng-container *ngSwitchCase="'loading'">
-        <tr>
-          <td colspan="5">Error: {{ data.error }}</td>
-        </tr>
-      </ng-container>
-      <ng-container *ngSwitchCase="'completed'">
-        <tr *ngSwitchCase="'completed'">
-
-        </tr>
-      </ng-container>
-    </ng-container>
-    <tr *ngIf="data.loading">
-      <td colspan="5">Loading...</td>
-    </tr>
-    <tr *ngIf="data.failed">
-      <td colspan="5">Error: {{data.error}}</td>
-    </tr>
-    <tr *ngFor="let job of data.data">
-      <td class="job-name">
-        <a [routerLink]="[job.groupName, job.jobName]" title="{{ job.description }}">{{ job.jobName }}</a>
-      </td>
-      <td class="job-group">{{ job.groupName }}</td>
-      <td class="job-type">{{ job.type}}</td>
-      <td class="next-fire-time"></td>
-      <td class="job-histogram">
-        <app-histogram></app-histogram>
-      </td>
-      <td>
-        <div *ngIf="job.persist" class="ui mini green label" title="Persist Job Data">P</div>
-        <div *ngIf="job.recovery" class="ui mini purple label" title="Request Recovery">R</div>
-        <div *ngIf="job.concurrent" class="ui mini orange label" title="Concurrent">C</div>
-      </td>
-    </tr>
     </tbody>
   </table>
 </ng-container>

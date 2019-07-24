@@ -17,6 +17,11 @@ import { JobHistoryComponent } from './history/job-history/job-history.component
 import { TriggerFormComponent } from './triggers/trigger-form/trigger-form.component';
 import { MenuComponent } from './menu/menu.component';
 import { FooterComponent } from './footer/footer.component';
+import { HttpClientModule } from '@angular/common/http';
+import { JobDataMapComponent } from './jobs/job-form/job-data-map/job-data-map.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatMenuModule, MatSelectModule } from '@angular/material';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -33,12 +38,18 @@ import { FooterComponent } from './footer/footer.component';
     JobHistoryComponent,
     TriggerFormComponent,
     MenuComponent,
-    FooterComponent
+    FooterComponent,
+    JobDataMapComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatSelectModule,
+    MatMenuModule,
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

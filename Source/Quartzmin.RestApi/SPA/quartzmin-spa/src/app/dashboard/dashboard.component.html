@@ -36,8 +36,6 @@
     </div>
   </div>
 
-
-
   <div class="ui stackable grid">
     <div class="seven wide column" style="padding-right: 14px !important">
       <h3 class="ui dividing header">Status</h3>
@@ -65,15 +63,17 @@
     <div class="nine wide column" id="col-actions">
       <h3 class="ui dividing header">Actions</h3>
 
-      <p style="margin-top: 1em">
-        <button *ngIf="data.InStandbyMode; else notStandByButton" class="ui small button green" id="btn-start"><i class="play icon"></i>Start</button>
+      <div class="dashboard-actions-container">
+        <ng-container *ngIf="data.InStandbyMode; else notStandByButton">
+          <button class="ui small button green" id="btn-start" (click)="start()"><i class="play icon"></i>Start</button>
+        </ng-container>
         <ng-template #notStandByButton>
-          <button class="ui small button grey" id="btn-standby"><i class="stop icon"></i>Standby</button>
+          <button class="ui small button grey" id="btn-standby" (click)="standBy()"><i class="stop icon"></i>Standby</button>
         </ng-template>
-        <button class="ui small button red" id="btn-shutdown"><i class="power icon"></i>Shutdown</button>
-        <button class="ui small button" id="btn-pause"><i class="pause icon"></i>Pause All</button>
-        <button class="ui small button" id="btn-resume"><i class="play icon"></i>Resume All</button>
-      </p>
+        <button class="ui small button red" id="btn-shutdown" (click)="shutdown()"><i class="power icon"></i>Shutdown</button>
+        <button class="ui small button" id="btn-pause" (click)="pauseAll()"><i class="pause icon"></i>Pause All</button>
+        <button class="ui small button" id="btn-resume" (click)="resumeAll()"><i class="play icon"></i>Resume All</button>
+      </div>
 
       <!--
       {{>GroupActions items=JobGroups id='job-groups' header='Job Groups'}}
@@ -160,42 +160,3 @@
     <div class="ui cancel button">Cancel</div>
   </div>
 </div>
-
-<script>
-  initHistogramTooltips($('.histogram > .bar'));
-  initDimmer();
-
-  function doAction(content) {
-    $('#dimmer').dimmer('show');
-
-    $.ajax({
-      type: 'POST', url: '{{ActionUrl "Action"}}',
-      data: JSON.stringify(content),
-      contentType: 'application/json', cache: false,
-      success: function () {
-        document.location = '{{ActionUrl ""}}';
-      },
-      error: function (e) {
-        $('#dimmer').dimmer('hide');
-        prependErrorMessage(e, $('#msg-panel'));
-      }
-    });
-  }
-
-  function confirmDialog(dlg, action) {
-    dlg.modal({ duration: 250, onApprove: function () { doAction({ action: action }); } })
-      .modal('show');
-  }
-
-  // event handlers
-  $('#btn-shutdown').click(function () { confirmDialog($('#shutdown-dialog'), 'shutdown'); });
-  $('#btn-pause').click(function () { doAction({ action: 'pause' }); });
-  $('#btn-resume').click(function () { doAction({ action: 'resume' }); });
-  $('#btn-standby').click(function () { doAction({ action: 'standby' }); });
-  $('#btn-start').click(function () { doAction({ action: 'start' }); });
-
-  $(document).on('click', '#job-groups.group-actions button, #trigger-groups.group-actions button', function () {
-    doAction({ action: $(this).data('action'), name: $(this).data('name'), groups: $(this).closest('.group-actions').attr('id') });
-  });
-
-</script>
