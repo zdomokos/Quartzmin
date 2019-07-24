@@ -49,12 +49,12 @@
         <ng-container *ngSwitchCase="'complete'">
           <tr *ngFor="let job of data.data">
             <td class="job-name">
-              <a [routerLink]="[job.groupName, job.jobName]" title="{{ job.description }}">{{ job.jobName }}</a>
+              <a [routerLink]="[job.group, job.name]" title="{{ job.description }}">{{ job.name }}</a>
               <button class="ui icon mini detail button"><i class="dots icon"></i></button>
             </td>
-            <td class="job-group">{{ job.groupName }}</td>
+            <td class="job-group">{{ job.group }}</td>
             <td class="job-type">{{ job.type}}</td>
-            <td class="next-fire-time"></td>
+            <td class="next-fire-time">{{ job.nextFireTime | appDate }}</td>
             <td class="job-histogram">
               <app-histogram></app-histogram>
             </td>

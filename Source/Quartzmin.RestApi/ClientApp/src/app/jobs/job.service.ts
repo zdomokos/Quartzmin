@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { delay } from 'rxjs/operators';
+
+import { environment } from '../../environments/environment';
+import { Group } from '../model/group';
 
 import { Job } from '../model/job';
 
@@ -9,26 +11,14 @@ import { Job } from '../model/job';
   providedIn: 'root'
 })
 export class JobService {
-  static readonly API_ROOT_URL = 'jobs';
+  static readonly API_ROOT_URL = `${environment.apiRoot}/jobs`;
   static readonly JOB_DETAIL_URL = `${JobService.API_ROOT_URL}/{jobId}`;
 
   constructor(private http: HttpClient) { }
 
 
   getAll(): Observable<Job[]> {
-    return of([
-      {
-        groupName: 'group name',
-        jobName: 'jobName',
-        description: 'descr',
-        type: 'some.class.fql',
-        persist: true,
-        recovery: true,
-        concurrent: true
-      }
-    ]).pipe(delay(1000));
-
-//    return this.http.get<Job[]>(JobService.API_ROOT_URL);
+    return this.http.get<Job[]>(JobService.API_ROOT_URL);
   }
 
   getDetail(jobId: string): Observable<Job> {
@@ -43,5 +33,14 @@ export class JobService {
 
   delete(jobId: string): Observable<void> {
     return null;
+  }
+
+  getJobGroups(): Observable<Group[]> {
+    return of([
+      { name: 'CRITICAL', isPaused: true },
+      { name: 'DEFAULT', isPaused: false },
+      { name: 'IMPORT', isPaused: true },
+      { name: 'REPORTS', isPaused: false },
+    ]);
   }
 }
