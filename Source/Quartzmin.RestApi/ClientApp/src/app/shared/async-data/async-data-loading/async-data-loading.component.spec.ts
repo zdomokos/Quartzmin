@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AsyncDataLoadingComponent } from './async-data-loading.component';
+import { AsyncDataLoadingDirective } from './async-data-loading.directive';
 
 describe('AsyncDataLoadingComponent', () => {
-  let component: AsyncDataLoadingComponent;
-  let fixture: ComponentFixture<AsyncDataLoadingComponent>;
+  let component: AsyncDataLoadingDirective;
+  let fixture: ComponentFixture<AsyncDataLoadingDirective>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AsyncDataLoadingComponent ]
+      declarations: [ AsyncDataLoadingDirective ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AsyncDataLoadingComponent);
+    fixture = TestBed.createComponent(AsyncDataLoadingDirective);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

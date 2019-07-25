@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AsyncDataErrorComponent } from './async-data-error.component';
+import { AsyncDataErrorDirective } from './async-data-error-directive.component';
 
 describe('AsyncDataErrorComponent', () => {
-  let component: AsyncDataErrorComponent;
-  let fixture: ComponentFixture<AsyncDataErrorComponent>;
+  let component: AsyncDataErrorDirective;
+  let fixture: ComponentFixture<AsyncDataErrorDirective>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AsyncDataErrorComponent ]
+      declarations: [ AsyncDataErrorDirective ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AsyncDataErrorComponent);
+    fixture = TestBed.createComponent(AsyncDataErrorDirective);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

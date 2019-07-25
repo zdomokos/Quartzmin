@@ -1,8 +1,8 @@
-import { AfterContentInit, Component, ContentChild, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterContentInit, Component, ContentChild, Input, OnInit, TemplateRef } from '@angular/core';
 import { AsyncData } from '../../../utils/async-data';
-import { AsyncDataErrorComponent } from '../async-data-error/async-data-error.component';
-import { AsyncDataLoadingComponent } from '../async-data-loading/async-data-loading.component';
-import { AsyncDataSuccessComponent } from '../async-data-success/async-data-success.component';
+import { AsyncDataErrorDirective } from '../async-data-error/async-data-error-directive.component';
+import { AsyncDataLoadingDirective } from '../async-data-loading/async-data-loading.directive';
+import { AsyncDataSuccessDirective } from '../async-data-success/async-data-success.directive';
 
 @Component({
   selector: 'app-async-data-wrapper, [app-async-data-wrapper]',
@@ -13,14 +13,14 @@ export class AsyncDataWrapperComponent<T, E> implements OnInit, AfterContentInit
   @Input()
   data: AsyncData<T, E>;
 
-  @ContentChild(AsyncDataErrorComponent, { static: false })
-  errorComponent: AsyncDataErrorComponent;
+  @ContentChild(AsyncDataErrorDirective, {static: false, read: TemplateRef})
+  errorComponent: TemplateRef<AsyncDataErrorDirective>;
 
-  @ContentChild(AsyncDataLoadingComponent, { static: false })
-  loadingComponent: AsyncDataLoadingComponent;
+  @ContentChild(AsyncDataLoadingDirective, {static: false, read: TemplateRef})
+  loadingComponent: TemplateRef<AsyncDataLoadingDirective>;
 
-  @ContentChild(AsyncDataSuccessComponent, { static: false })
-  successComponent: AsyncDataSuccessComponent;
+  @ContentChild(AsyncDataSuccessDirective, {static: false, read: TemplateRef})
+  successComponent: TemplateRef<AsyncDataSuccessDirective<T, E>>;
 
   constructor() { }
 
