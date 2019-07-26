@@ -59,7 +59,7 @@
           </td>
           <td class="trigger-group">{{ trigger.group }}</td>
           <td class="schedule-desc"> <!--  data-content="{{ScheduleDescription}}" -->
-            <i class="{{TypeIcon}} icon"></i>{{TypeString}}
+            <i [ngClass]="trigger.typeIcon" class="icon"></i>{{ trigger.typeString }}
           </td>
           <td class="trigger-start">{{ trigger.startTime | appDate | appDefault: 'N/A' }}</td>
           <td class="trigger-end">{{ trigger.endTime | appDate | appDefault: 'N/A'  }}</td>

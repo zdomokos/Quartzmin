@@ -13,10 +13,19 @@ export class TriggerListComponent implements OnInit {
   jobSeparator = false;
   triggers$: Observable<AsyncData<Trigger[]>>;
 
+  job;
+
   constructor(private triggerService: TriggerService) { }
 
   ngOnInit() {
     this.triggers$ = getAsyncData(this.triggerService.getAll());
   }
 
+  pauseAll() {
+
+  }
+
+  resumeAll() {
+
+  }
 }

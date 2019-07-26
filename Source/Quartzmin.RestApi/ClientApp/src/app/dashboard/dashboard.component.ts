@@ -46,6 +46,7 @@ export class DashboardComponent implements OnInit {
     }
   });
   jobGroups$: Observable<Group[]> = this.jobService.getJobGroups();
+  triggerGroups$: Observable<Group[]> = this.jobService.getJobGroups();
 
   constructor(private jobService: JobService) {
   }
