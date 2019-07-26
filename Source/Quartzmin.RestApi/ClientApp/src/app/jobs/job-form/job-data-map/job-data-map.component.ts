@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { DataType, DataTypeMap } from './data-types';
 
 @Component({
   selector: 'app-job-data-map',
@@ -10,7 +11,7 @@ export class JobDataMapComponent implements OnInit {
   @Input()
   form: FormGroup;
 
-  supportedTypes = [ 1, 2, 3 ];
+  supportedTypes = DataTypeMap;
 
   constructor(private fb: FormBuilder) { }
 
@@ -31,6 +32,7 @@ export class JobDataMapComponent implements OnInit {
     const group = this.fb.group({
       name: [''],
       type: [''],
+      value: [null],
     });
 
     if (defaultValues != null) {

@@ -1,0 +1,6 @@
+<ng-container [ngSwitch]="type">
+  <ng-container *ngSwitchDefault>
+    <input type="text" [ngModel]="value" (ngModelChange)="propagateChangedValue($event)" />
+  </ng-container>
+  <!-- TODO: Date, DateTime, File, Boolean, Float-->
+</ng-container>

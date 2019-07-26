@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,6 +26,7 @@ import { EmptyPageComponent } from './empty-page/empty-page.component';
 import { LoaderComponent } from './loader/loader.component';
 import { HistogramTooltipComponent } from './histogram/histogram-tooltip/histogram-tooltip.component';
 import { GroupActionsComponent } from './dashboard/group-actions/group-actions.component';
+import { DataInputComponent } from './jobs/job-form/data-input/data-input.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { GroupActionsComponent } from './dashboard/group-actions/group-actions.c
     EmptyPageComponent,
     LoaderComponent,
     HistogramTooltipComponent,
-    GroupActionsComponent
+    GroupActionsComponent,
+    DataInputComponent
   ],
   imports: [
     BrowserModule,
@@ -58,6 +60,7 @@ import { GroupActionsComponent } from './dashboard/group-actions/group-actions.c
     MatSelectModule,
     MatMenuModule,
     SharedModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

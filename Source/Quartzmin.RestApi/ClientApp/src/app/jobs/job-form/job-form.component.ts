@@ -28,6 +28,8 @@ export class JobFormComponent implements OnInit {
   }
 
   submitForm() {
+    console.log(this.form.value);
+
     if (!this.form.valid) {
       return;
     }

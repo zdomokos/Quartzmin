@@ -6,7 +6,7 @@
       <div *ngIf="isEdit" class="negative ui button" id="btn-delete">Delete</div>
       <div class="ui buttons">
         <button class="ui primary button" id="btn-save">Save</button>
-        <button class="ui floating dropdown icon primary button" id="save-dropdown" [matMenuTriggerFor]="saveMenu">
+        <button type="button" class="ui floating dropdown icon primary button" id="save-dropdown" [matMenuTriggerFor]="saveMenu">
           <i class="dropdown icon"></i>
         </button>
         <mat-menu #saveMenu="matMenu">
