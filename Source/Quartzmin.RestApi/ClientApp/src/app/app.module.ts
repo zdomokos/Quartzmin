@@ -20,7 +20,13 @@ import { FooterComponent } from './footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
 import { JobDataMapComponent } from './jobs/job-form/job-data-map/job-data-map.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatMenuModule, MatSelectModule } from '@angular/material';
+import {
+  MatAutocompleteModule,
+  MatDatepickerModule,
+  MatMenuModule,
+  MatNativeDateModule,
+  MatSelectModule
+} from '@angular/material';
 import { SharedModule } from './shared/shared.module';
 import { EmptyPageComponent } from './empty-page/empty-page.component';
 import { LoaderComponent } from './loader/loader.component';
@@ -61,6 +67,9 @@ import { DataInputComponent } from './jobs/job-form/data-input/data-input.compon
     MatMenuModule,
     SharedModule,
     FormsModule,
+    MatAutocompleteModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

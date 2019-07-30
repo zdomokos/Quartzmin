@@ -5,10 +5,10 @@
     <div style="float: right">
       <a class="ui button" id="btn-discard" (click)="resetForm()">Discard Changes</a>
       <ng-container *ngIf="isEdit; else saveTriggerBtn">
-        <div class="negative ui button" id="btn-delete">Delete</div>
+        <button class="negative ui button" id="btn-delete">Delete</button>
       </ng-container>
       <ng-template #saveTriggerBtn>
-        <div class="ui primary button" id="btn-save">Save</div>
+        <button class="ui primary button" id="btn-save">Save</button>
       </ng-template>
     </div>
     <h1 class="ui left floated header">
@@ -52,7 +52,7 @@
       <div class="fields">
         <div class="twelve wide field accept-error">
           <label for="jobSelect">Job</label>
-          <mat-select class="ui fluid dropdown" formControlName="job" id="jobSelect">
+          <mat-select class="ui fluid dropdown" id="jobSelect" formControlName="job" >
             <mat-option value="">Select</mat-option>
             <mat-option *ngFor="let job of jobs" [value]="job">
               {{ job.name }}
@@ -68,7 +68,8 @@
         </div>
         <div class="field accept-error">
           <label for="triggerGroup">Trigger Group</label>
-          <mat-autocomplete class="ui search selection dropdown allow-additions" id="triggerGroup" formControlName="group">
+          <input type="text" placeholder="Trigger Group" id="triggerGroup" formControlName="group" [matAutocomplete]="groupAutoCpl" />
+          <mat-autocomplete class="ui search selection dropdown allow-additions" #groupAutoCpl="matAutocomplete">
             <mat-option *ngFor="let group of groups" [value]="group">
               {{ group }}
             </mat-option>
@@ -87,7 +88,11 @@
           <div class="ui calendar date-time">
             <div class="ui fluid input left icon">
               <i class="calendar alternate outline icon"></i>
-              <input id="triggerStartDate" type="text" autocomplete="off" placeholder="Date/Time" formControlName="startDate">
+              <input id="triggerStartDate" autocomplete="off" placeholder="Date/Time"
+                     [matDatepicker]="triggerStartDatePicker"
+                     formControlName="startDate">
+              <mat-datepicker-toggle [for]="triggerStartDatePicker"></mat-datepicker-toggle>
+              <mat-datepicker #triggerStartDatePicker></mat-datepicker>
             </div>
           </div>
         </div>
@@ -125,7 +130,7 @@
         </div>
       </div>
 
-      <h3 class="ui dividing header" id="specificTriggerHeader"></h3>
+      <h3 class="ui dividing header" id="specificTriggerHeader">{{ form.get('type').value }}</h3>
 
       <div class="cron trigger-type" *ngIf="form.get('type').value === 'cron'">
         <div class="fields">
@@ -179,15 +184,15 @@
       <div class="calendar trigger-type" *ngIf="form.get('type').value === 'calendar'">
         <div class="fields">
           <div class="four wide field accept-error">
-            <label>Repeat Interval</label>
-            <input type="text" name="trigger[calendar.repeatInterval]" placeholder="Repeat Interval" />
+            <label for="triggerCalendarRepeatInterval">Repeat Interval</label>
+            <input type="text" id="triggerCalendarRepeatInterval" placeholder="Repeat Interval" />
           </div>
           <div class="three wide field accept-error">
             <label>Unit</label>
           </div>
           <div class="nine wide field accept-error">
-            <label>Time Zone</label>
-            <select class="ui fluid search fulltext selection dropdown allow-empty" name="trigger[calendar.timeZone]">
+            <label for="triggerCalendarTimezone">Time Zone</label>
+            <select id="triggerCalendarTimezone" class="ui fluid search fulltext selection dropdown allow-empty">
               <option value="">--- Not Set ---</option>
             </select>
           </div>
@@ -211,17 +216,17 @@
       <div class="daily trigger-type" *ngIf="form.get('type').value === 'daily'">
         <div class="fields">
           <div class="four wide field accept-error">
-            <label>Repeat Interval</label>
-            <input type="text" name="trigger[daily.repeatInterval]" placeholder="Repeat Interval"  />
+            <label for="triggerDailyRepeatInterval">Repeat Interval</label>
+            <input id="triggerDailyRepeatInterval" type="text" placeholder="Repeat Interval"  />
           </div>
           <div class="three wide field accept-error">
             <label>Unit</label>
           </div>
           <div class="nine wide field accept-error">
-            <label>Time Zone</label>
-            <select class="ui fluid search fulltext selection dropdown allow-empty" name="trigger[daily.timeZone]">
-              <option value="">--- Not Set ---</option>
-            </select>
+            <label for="triggerDailyTimezone">Time Zone</label>
+            <mat-select id="triggerDailyTimezone" class="ui fluid search fulltext selection dropdown allow-empty">
+              <mat-option [value]="null">--- Not Set ---</mat-option>
+            </mat-select>
           </div>
         </div>
 
@@ -260,25 +265,29 @@
           </div>
         </div>
 
-        <ng-container *ngIf="['daysOfWeek']">
+        <ng-container *ngIf="true">
           <div class="field">
             <label>Days of Week</label>
             <div class="inline fields">
               <div class="field">
                 <div class="ui checkbox">
-                  <input type="checkbox" name="trigger[daily.daysOfWeek.monday]" value="True" />
-                  <label>Monday</label>
+                  <label>
+                    <input id="dowMonday" type="checkbox" />
+                    Monday
+                  </label>
                 </div>
               </div>
               <div class="field">
                 <div class="ui checkbox">
-                  <input type="checkbox" name="trigger[daily.daysOfWeek.tuesday]" value="True" />
-                  <label>Tuesday</label>
+                  <label>
+                    <input type="checkbox" />
+                    Tuesday
+                  </label>
                 </div>
               </div>
               <div class="field">
                 <div class="ui checkbox">
-                  <input type="checkbox" name="trigger[daily.daysOfWeek.wednesday]" value="True" />
+                  <input type="checkbox" />
                   <label>Wednesday</label>
                 </div>
               </div>

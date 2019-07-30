@@ -9,26 +9,33 @@ import { TriggerType } from '../../model/trigger';
   styleUrls: ['./trigger-form.component.scss']
 })
 export class TriggerFormComponent implements OnInit {
-  form: FormGroup = this.fb.group({
+  defaultControls = this.fb.group({
     name: ['', Validators.required],
     group: [''],
+    job: [''],
     description: [''],
     type: [TriggerType.Simple, Validators.required],
+    startDate: [],
+    endDate: [],
+    calendarName: [],
+    misfireInstructions: [],
+    priority: [],
 
-
-    repeatForever: [false],
+    dataMap: this.fb.array([]),
   });
+
+  form: FormGroup = this.createFormGroup(TriggerType.Cron);
 
   isEdit: boolean;
 
-  jobs: Job[];
-  groups: string[];
+  jobs: Job[] = [];
+  groups: string[] = [];
 
   constructor(private fb: FormBuilder) {
-    this.form.get('type').valueChanges.pipe().subscribe(type => {
-
+    this.defaultControls.get('type').valueChanges.pipe().subscribe(type => {
+      this.form = this.createFormGroup(type, this.form.value);
     });
-
+/*
     this.form.get('repeatForever').valueChanges.pipe().subscribe(repeatForever => {
       if (repeatForever) {
         this.form.get('repeatCount').disable();
@@ -36,22 +43,10 @@ export class TriggerFormComponent implements OnInit {
         this.form.get('repeatCount').enable();
       }
     });
+ */
   }
 
   createFormGroup(type: TriggerType, defaultValues?: any) {
-    const defaultControls = {
-      name: ['', Validators.required],
-      group: [''],
-      job: [''],
-      description: [''],
-      type: [type, Validators.required],
-      startDate: [],
-      endDate: [],
-      calendarName: [],
-      misfireInstructions: [],
-      priority: [],
-    };
-
     let additionalControls;
 
     switch (type) {
@@ -90,7 +85,7 @@ export class TriggerFormComponent implements OnInit {
     }
 
     const form = this.fb.group({
-      ...defaultControls,
+      ...this.defaultControls.controls,
       ...additionalControls,
     });
 
