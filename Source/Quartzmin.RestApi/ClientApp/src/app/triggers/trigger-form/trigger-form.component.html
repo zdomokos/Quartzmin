@@ -101,7 +101,11 @@
           <div class="ui calendar date-time">
             <div class="ui fluid input left icon">
               <i class="calendar alternate outline icon"></i>
-              <input id="triggerEndDate" type="text" autocomplete="off" placeholder="Date/Time"  formControlName="endDate">
+              <input id="triggerEndDate" type="text" autocomplete="off" placeholder="Date/Time"
+                     [matDatepicker]="triggerEndDatePicker"
+                     formControlName="endDate">
+              <mat-datepicker-toggle [for]="triggerEndDatePicker"></mat-datepicker-toggle>
+              <mat-datepicker #triggerEndDatePicker></mat-datepicker>
             </div>
           </div>
         </div>
@@ -132,7 +136,7 @@
 
       <h3 class="ui dividing header" id="specificTriggerHeader">{{ form.get('type').value }}</h3>
 
-      <div class="cron trigger-type" *ngIf="form.get('type').value === 'cron'">
+      <div class="cron trigger-type" *ngIf="form.get('type').value === 'cron'" [formGroup]="selectedFormGroup">
         <div class="fields">
           <div class="seven wide field accept-error cron-field">
             <label for="cron-expression">Cron Expression <a href="http://cronmaker.com" target="_blank">
@@ -151,7 +155,7 @@
         </div>
       </div>
 
-      <div class="simple trigger-type" *ngIf="form.get('type').value === 'simple'">
+      <div class="simple trigger-type" *ngIf="form.get('type').value === 'simple'" [formGroup]="selectedFormGroup">
         <div class="fields">
           <div class="four wide field accept-error">
             <label for="repeatInterval">Repeat Interval</label>
@@ -181,7 +185,7 @@
 
       </div>
 
-      <div class="calendar trigger-type" *ngIf="form.get('type').value === 'calendar'">
+      <div class="calendar trigger-type" *ngIf="form.get('type').value === 'calendar'" [formGroup]="selectedFormGroup">
         <div class="fields">
           <div class="four wide field accept-error">
             <label for="triggerCalendarRepeatInterval">Repeat Interval</label>
@@ -213,7 +217,7 @@
         </div>
       </div>
 
-      <div class="daily trigger-type" *ngIf="form.get('type').value === 'daily'">
+      <div class="daily trigger-type" *ngIf="form.get('type').value === 'daily'" [formGroup]="selectedFormGroup">
         <div class="fields">
           <div class="four wide field accept-error">
             <label for="triggerDailyRepeatInterval">Repeat Interval</label>
@@ -265,59 +269,53 @@
           </div>
         </div>
 
-        <ng-container *ngIf="true">
-          <div class="field">
-            <label>Days of Week</label>
-            <div class="inline fields">
-              <div class="field">
-                <div class="ui checkbox">
-                  <label>
-                    <input id="dowMonday" type="checkbox" />
-                    Monday
-                  </label>
-                </div>
+        <div class="field" formArrayName="daysOfWeek">
+          <label>Days of Week</label>
+          <div class="inline fields">
+            <div class="field">
+              <div class="ui checkbox">
+                <input id="dowMonday" type="checkbox" formControlName="1" />
+                <label for="dowMonday">Monday</label>
               </div>
-              <div class="field">
-                <div class="ui checkbox">
-                  <label>
-                    <input type="checkbox" />
-                    Tuesday
-                  </label>
-                </div>
+            </div>
+            <div class="field">
+              <div class="ui checkbox">
+                <input id="dowTuesday" type="checkbox" formControlName="2" />
+                <label for="dowTuesday">Tuesday</label>
               </div>
-              <div class="field">
-                <div class="ui checkbox">
-                  <input type="checkbox" />
-                  <label>Wednesday</label>
-                </div>
+            </div>
+            <div class="field">
+              <div class="ui checkbox">
+                <input id="dowWednesday" type="checkbox" formControlName="3" />
+                <label for="dowWednesday">Wednesday</label>
               </div>
-              <div class="field">
-                <div class="ui checkbox">
-                  <input type="checkbox" name="trigger[daily.daysOfWeek.thursday]" value="True" />
-                  <label>Thursday</label>
-                </div>
+            </div>
+            <div class="field">
+              <div class="ui checkbox">
+                <input id="dowThursday" type="checkbox" formControlName="4" />
+                <label for="dowThursday">Thursday</label>
               </div>
-              <div class="field">
-                <div class="ui checkbox">
-                  <input type="checkbox" name="trigger[daily.daysOfWeek.friday]" value="True" />
-                  <label>Friday</label>
-                </div>
+            </div>
+            <div class="field">
+              <div class="ui checkbox">
+                <input id="dowFriday" type="checkbox" formControlName="5" />
+                <label for="dowFriday">Friday</label>
               </div>
-              <div class="field">
-                <div class="ui checkbox">
-                  <input type="checkbox" name="trigger[daily.daysOfWeek.saturday]" value="True" />
-                  <label>Saturday</label>
-                </div>
+            </div>
+            <div class="field">
+              <div class="ui checkbox">
+                <input id="dowSaturday" type="checkbox" formControlName="6" />
+                <label for="dowSaturday">Saturday</label>
               </div>
-              <div class="field">
-                <div class="ui checkbox">
-                  <input type="checkbox" name="trigger[daily.daysOfWeek.sunday]" value="True" />
-                  <label>Sunday</label>
-                </div>
+            </div>
+            <div class="field">
+              <div class="ui checkbox">
+                <input id="dowSunday" type="checkbox" formControlName="0" />
+                <label for="dowSunday">Sunday</label>
               </div>
             </div>
           </div>
-        </ng-container>
+        </div>
       </div>
     </div>
     <h3 class="ui dividing header">Job Data Map</h3>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Job } from '../../model/job';
-import { TriggerType } from '../../model/trigger';
+import { Trigger, TriggerType } from '../../model/trigger';
 
 @Component({
   selector: 'app-trigger-form',
@@ -24,7 +24,48 @@ export class TriggerFormComponent implements OnInit {
     dataMap: this.fb.array([]),
   });
 
-  form: FormGroup = this.createFormGroup(TriggerType.Cron);
+  sharedControls = {
+    repeatInterval: this.fb.control(''),
+    repeatUnit: this.fb.control(''),
+    repeatCount: this.fb.control(''),
+    repeatForever: this.fb.control(false),
+    timezone: this.fb.control(''),
+  };
+
+  specificControls = {
+    [TriggerType.Cron]: this.fb.group({
+      cronExpression: [''],
+      timezone: this.sharedControls.timezone,
+    }),
+    [TriggerType.Simple]: this.fb.group({
+      repeatInterval: this.sharedControls.repeatInterval,
+      repeatUnit: this.sharedControls.repeatUnit,
+      repeatCount: this.sharedControls.repeatCount,
+      repeatForever: this.sharedControls.repeatForever,
+    }),
+    [TriggerType.Calendar]: this.fb.group({
+      repeatInterval: this.sharedControls.repeatInterval,
+      timezone: this.sharedControls.timezone,
+      skipDayIfHourDoesNotExist: [false],
+      preserveHourAcrossDst: [false],
+    }),
+    [TriggerType.Daily]: this.fb.group({
+      repeatInterval: this.sharedControls.repeatInterval,
+      repeatUnit: this.sharedControls.repeatUnit,
+      repeatCount: this.sharedControls.repeatCount,
+      repeatForever: this.sharedControls.repeatForever,
+      timezone: this.sharedControls.timezone,
+      startTime: [],
+      endTime: [],
+      daysOfWeek: this.fb.array(
+        Array.from({ length: 7 }, (_, index) => this.fb.control(false))
+      )
+    })
+  };
+
+  form: FormGroup = this.selectFormGroup(TriggerType.Cron);
+
+  selectedFormGroup: FormGroup = this.specificControls[TriggerType.Simple];
 
   isEdit: boolean;
 
@@ -33,64 +74,31 @@ export class TriggerFormComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {
     this.defaultControls.get('type').valueChanges.pipe().subscribe(type => {
-      this.form = this.createFormGroup(type, this.form.value);
+      this.selectedFormGroup = this.specificControls[type];
+      this.form = this.selectFormGroup(type);
     });
-/*
-    this.form.get('repeatForever').valueChanges.pipe().subscribe(repeatForever => {
+
+    this.sharedControls.repeatForever.valueChanges.pipe().subscribe(repeatForever => {
       if (repeatForever) {
-        this.form.get('repeatCount').disable();
+        this.sharedControls.repeatCount.disable();
       } else {
-        this.form.get('repeatCount').enable();
+        this.sharedControls.repeatCount.enable();
       }
     });
- */
   }
 
-  createFormGroup(type: TriggerType, defaultValues?: any) {
-    let additionalControls;
-
-    switch (type) {
-      default:
-      case TriggerType.Simple:
-        additionalControls = {
-          repeatInterval: [],
-          repeatUnit: [],
-          repeatCount: [],
-          repeatForever: [false],
-        };
-        break;
-      case TriggerType.Calendar:
-        additionalControls = {
-          repeatInterval: [],
-          timezone: [],
-        };
-        break;
-      case TriggerType.Daily:
-        additionalControls = {
-          repeatInterval: [],
-          repeatUnit: [],
-          repeatCount: [],
-          repeatForever: [],
-          timezone: [],
-          startTime: [],
-          endTime: [],
-        };
-        break;
-      case TriggerType.Cron:
-        additionalControls = {
-          cronExpression: [''],
-          timezone: [],
-        };
-        break;
-    }
+  selectFormGroup(type: TriggerType, defaultValues?: any) {
+    const additionalControlsGroup = (type == null)
+      ? this.specificControls[TriggerType.Simple]
+      : this.specificControls[type];
 
     const form = this.fb.group({
       ...this.defaultControls.controls,
-      ...additionalControls,
+      ...additionalControlsGroup.controls,
     });
 
     if (defaultValues != null) {
-      form.patchValue(defaultValues);
+      form.patchValue( { ...defaultValues, type }, { emitEvent: false });
     }
 
     return form;
