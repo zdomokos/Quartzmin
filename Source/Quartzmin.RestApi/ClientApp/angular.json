@@ -138,5 +138,8 @@
       }
     }
   },
-  "defaultProject": "quartzmin-spa"
+  "defaultProject": "quartzmin-spa",
+  "cli": {
+    "defaultCollection": "ngx-schematics-for-storybook"
+  }
 }
