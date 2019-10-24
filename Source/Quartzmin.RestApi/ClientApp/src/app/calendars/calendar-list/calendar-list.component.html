@@ -9,21 +9,4 @@
 
 <div id="msg-panel"></div>
 
-<table class="ui single line table highlight-rows" id="calendar-list">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Type</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let calendar of []">
-      <td class="cal-name"><a [routerLink]="['edit', calendar.Name]">{{ calendar.Name }}</a></td>
-      <td class="cal-desc">{{ calendar.Description }}</td>
-      <td class="cal-type">
-        <img class="ui inline image" src="Content/Images/type.png">&nbsp;{{ calendar.Type.FullName }}
-      </td>
-    </tr>
-  </tbody>
-</table>
+<app-calendar-table [calendars]="calendars$ | async"></app-calendar-table>

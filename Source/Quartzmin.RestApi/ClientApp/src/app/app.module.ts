@@ -35,6 +35,7 @@ import { GroupActionsComponent } from './dashboard/group-actions/group-actions.c
 import { DataInputComponent } from './jobs/job-form/data-input/data-input.component';
 import { JobTableComponent } from './jobs/job-table/job-table.component';
 import { ExecutionTableComponent } from './executions/execution-table/execution-table.component';
+import { CalendarTableComponent } from './calendars/calendar-table/calendar-table.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { ExecutionTableComponent } from './executions/execution-table/execution-
     GroupActionsComponent,
     DataInputComponent,
     JobTableComponent,
-    ExecutionTableComponent
+    ExecutionTableComponent,
+    CalendarTableComponent
   ],
   imports: [
     BrowserModule,
