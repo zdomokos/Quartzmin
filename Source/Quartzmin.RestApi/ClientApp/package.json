@@ -8,7 +8,8 @@
     "build:ssr": "ng run qartzmin-spa:server:dev",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "storybook": "start-storybook"
   },
   "private": true,
   "dependencies": {
@@ -34,9 +35,12 @@
     "@angular/cli": "~8.3.14",
     "@angular/compiler-cli": "~8.2.12",
     "@angular/language-service": "~8.2.12",
-    "@types/node": "~8.9.4",
+    "@babel/core": "^7.6.4",
+    "@storybook/angular": "^5.2.5",
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
+    "@types/node": "~8.9.4",
+    "babel-loader": "^8.0.6",
     "codelyzer": "^5.0.1",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
