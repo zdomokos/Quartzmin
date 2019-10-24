@@ -33,6 +33,7 @@ import { LoaderComponent } from './loader/loader.component';
 import { HistogramTooltipComponent } from './histogram/histogram-tooltip/histogram-tooltip.component';
 import { GroupActionsComponent } from './dashboard/group-actions/group-actions.component';
 import { DataInputComponent } from './jobs/job-form/data-input/data-input.component';
+import { JobTableComponent } from './jobs/job-table/job-table.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { DataInputComponent } from './jobs/job-form/data-input/data-input.compon
     LoaderComponent,
     HistogramTooltipComponent,
     GroupActionsComponent,
-    DataInputComponent
+    DataInputComponent,
+    JobTableComponent
   ],
   imports: [
     BrowserModule,

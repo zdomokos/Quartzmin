@@ -31,7 +31,7 @@ export type AsyncData<T, E = string> = LoadingData | CompleteData<T> | ErrorData
 
 export const LoadingState: LoadingData = Object.freeze({ state: 'loading', loading: true, failed: false, data: null }) as any;
 
-function wrapData<T>(data: T): CompleteData<T> {
+export function wrapData<T>(data: T): CompleteData<T> {
   return {
     state: 'complete',
     loading: false,
@@ -40,7 +40,7 @@ function wrapData<T>(data: T): CompleteData<T> {
   };
 }
 
-function wrapError<E>(error: E): ErrorData<E> {
+export function wrapError<E>(error: E): ErrorData<E> {
   return {
     state: 'error',
     loading: false,
