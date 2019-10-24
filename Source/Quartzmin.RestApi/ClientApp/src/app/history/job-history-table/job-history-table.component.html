@@ -1,0 +1,34 @@
+<table class="ui single line table highlight-rows" id="history-list">
+  <thead>
+    <tr>
+      <th>Job</th>
+      <th>Trigger</th>
+      <th>Scheduled Fire Time</th>
+      <th>Actual Fire Time</th>
+      <th>Finished Time</th>
+      <th>Run Time</th>
+    </tr>
+  </thead>
+  <tbody>
+  <ng-container *ngFor="let item of []">
+    <tr>
+      <td class="job-key">
+        <i [ngClass]="getStateIcon(item)" class="icon" title="{{ item.State }}"></i>
+        <a [routerLink]="['/jobs', item.JobGroup, item.JobName, 'edit']">{{ item.JobGroup }}.{{ item.JobName }}</a>
+      </td>
+      <td>
+        <a [routerLink]="['/triggers', item.TriggerGroup, item.TriggerName, 'edit']">{{ item.TriggerGroup }}.{{ item.TriggerName }}</a>
+      </td>
+      <td>{{ item.ScheduledFireTimeUtc }}</td>
+      <td>{{ item.ActualFireTimeUtc }}</td>
+      <td>{{ item.FinishedTimeUtc }}</td>
+      <td>{{ item.Duration }}</td>
+    </tr>
+    <tr class="error-row" *ngIf="item.Entity.ExceptionMessage">
+      <td colspan="6">
+        <p>{{ item.Entity.ExceptionMessage }}</p>
+      </td>
+    </tr>
+  </ng-container>
+  </tbody>
+</table>

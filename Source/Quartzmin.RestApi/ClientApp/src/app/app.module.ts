@@ -36,6 +36,8 @@ import { DataInputComponent } from './jobs/job-form/data-input/data-input.compon
 import { JobTableComponent } from './jobs/job-table/job-table.component';
 import { ExecutionTableComponent } from './executions/execution-table/execution-table.component';
 import { CalendarTableComponent } from './calendars/calendar-table/calendar-table.component';
+import { JobHistoryTableComponent } from './history/job-history-table/job-history-table.component';
+import { NotificationComponent } from './notification/notification.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +63,9 @@ import { CalendarTableComponent } from './calendars/calendar-table/calendar-tabl
     DataInputComponent,
     JobTableComponent,
     ExecutionTableComponent,
-    CalendarTableComponent
+    CalendarTableComponent,
+    JobHistoryTableComponent,
+    NotificationComponent
   ],
   imports: [
     BrowserModule,

@@ -14,7 +14,5 @@ export class JobHistoryComponent implements OnInit {
   ngOnInit() {
   }
 
-  getStateIcon(item): string {
-    return '';
-  }
+
 }
