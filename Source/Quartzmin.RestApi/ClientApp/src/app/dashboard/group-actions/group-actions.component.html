@@ -5,7 +5,7 @@
       {{ group.name }}
       <button class="ui super tiny button">
         <i class="icon" [ngClass]="getButtonClass(group)"></i>
-        {{ group.isPaused ? 'Pause' : 'Resume' }}
+        {{ getGroupText(group) }}
       </button>
     </li>
   </ul>

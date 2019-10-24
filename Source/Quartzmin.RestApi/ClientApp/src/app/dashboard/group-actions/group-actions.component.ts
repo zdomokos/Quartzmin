@@ -19,19 +19,15 @@ export class GroupActionsComponent implements OnInit {
   ngOnInit() {
   }
 
-  getGroupClass(group: Group) {
-    if (group.isPaused) {
-      return 'paused';
-    }
-
-    return 'resumed';
+  getGroupClass(group: Group): string {
+    return group.isPaused ? 'paused' : 'resumed';
   }
 
-  getButtonClass(group: Group) {
-    if (group.isPaused) {
-      return 'pause';
-    }
+  getButtonClass(group: Group): string {
+    return group.isPaused ? 'play' : 'pause';
+  }
 
-    return 'play';
+  getGroupText(group: Group): string {
+    return group.isPaused ? 'Resume' : 'Pause';
   }
 }
