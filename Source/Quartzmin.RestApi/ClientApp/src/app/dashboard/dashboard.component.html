@@ -3,7 +3,7 @@
 <div class="dashboard" id="scheduler-dashboard" *ngIf="(data$ | async) as data">
   <div id="msg-panel"></div>
 
-  <h3 class="ui dividing header" style="margin-top: 0">Overview</h3>
+  <h3 class="ui dividing header">Overview</h3>
 
   <div class="ui inverted statistic statistics-executed">
     <div class="value"><i class="small check icon"></i> {{ data.jobs.countExecuted }}</div>
