@@ -1,15 +1,15 @@
 <ng-container *ngIf="historyEnabled; else historyDisabledMessage">
-  <div class="ui message">
-    <i class="info circle icon"></i>
-    History is periodically purged. Only recent job executions are shown.
-  </div>
-
+  <app-notification
+    type="info"
+    text="History is periodically purged. Only recent job executions are shown.">
+  </app-notification>
   <app-job-history-table></app-job-history-table>
 </ng-container>
 
 <ng-template #historyDisabledMessage>
-  <div class="ui negative message">
-    <div class="header" style="margin-bottom: 0.5em">Job history is not available.</div>
-    Enable ExecutionHistoryPlugin in Quartz configuration section.
-  </div>
+  <app-notification
+    type="error"
+    header="Job history is not available."
+    text="Enable ExecutionHistoryPlugin in Quartz configuration section.">
+  </app-notification>
 </ng-template>
