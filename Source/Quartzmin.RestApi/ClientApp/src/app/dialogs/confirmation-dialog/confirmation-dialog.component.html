@@ -1,10 +1,10 @@
-<div class="ui mini modal" id="delete-dialog">
+<div class="ui mini modal visible active">
   <div class="content">
-    <p>Are you sure you want to delete this job?</p>
+    <p>{{ text }}</p>
     <p><b class="confirm-item"></b></p>
   </div>
   <div class="actions">
-    <div class="ui approve red button" (click)="confirm()">Delete</div>
-    <div class="ui cancel button" (click)="cancel()">Cancel</div>
+    <div class="ui approve red button" (click)="confirm()">{{ confirmText }}</div>
+    <div class="ui cancel button" (click)="cancel()">{{ cancelText }}</div>
   </div>
 </div>
