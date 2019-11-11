@@ -37,9 +37,15 @@ export const showCloseIcon = () => ({
 
 export const none = () => getStory('');
 export const success = () => getStory(NotificationType.SUCCESS);
-export const info = () => getStory(NotificationType.INFO);
 export const error = () => getStory(NotificationType.ERROR);
 export const warning = () => getStory(NotificationType.WARNING);
+export const info = () => ({
+  component: NotificationComponent,
+  props: {
+    type: NotificationType.INFO,
+    text: 'Some text only'
+  }
+});
 
 const getStory = (type) => ({
   component: NotificationComponent,

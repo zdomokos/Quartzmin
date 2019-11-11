@@ -28,9 +28,16 @@ export class NotificationComponent {
   @Input()
   text: string;
 
+  private _type: NotificationType;
+
   @Input()
   set type(value: NotificationType) {
+    this._type = value;
     this.cssClass = this.getCssClass(value);
+  }
+
+  get type(): NotificationType {
+    return this._type;
   }
 
   @Input()
