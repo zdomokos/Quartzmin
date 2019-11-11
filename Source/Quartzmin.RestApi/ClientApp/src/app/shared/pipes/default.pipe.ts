@@ -6,12 +6,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class DefaultPipe implements PipeTransform {
 
-  transform(value: any, defValue: any): any {
-    if (value == null) {
-      return defValue;
-    }
-
-    return value;
+  transform<I, O>(value: I, defValue: O): I|O {
+    return value == null ? defValue : value;
   }
 
 }
