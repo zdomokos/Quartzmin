@@ -3,6 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Job } from '../../model/job';
 import { Trigger, TriggerType } from '../../model/trigger';
 
+const defaultValue = {
+  type: TriggerType.Simple
+};
+
 @Component({
   selector: 'app-trigger-form',
   templateUrl: './trigger-form.component.html',
@@ -112,6 +116,6 @@ export class TriggerFormComponent implements OnInit {
   }
 
   resetForm() {
-
+    this.form.reset(defaultValue);
   }
 }
