@@ -18,7 +18,7 @@
   <div class="fields">
     <div class="four wide field accept-error">
       <label for="triggerDailyRepeatCount">Repeat Count</label>
-      <input id="triggerDailyRepeatCount" type="text" placeholder="Repeat Count" formControlName="repeatCount" />
+      <input id="triggerDailyRepeatCount" type="number" placeholder="Repeat Count" formControlName="repeatCount" />
     </div>
   </div>
 
@@ -35,7 +35,7 @@
       <div class="ui calendar time-only">
         <div class="ui fluid input left icon">
           <i class="clock alternate outline icon"></i>
-          <input id="triggerStartTime" type="text" autocomplete="off" placeholder="Time" formControlName="startTime">
+          <input id="triggerStartTime" type="time" autocomplete="off" placeholder="Time" formControlName="startTime">
         </div>
       </div>
     </div>
@@ -44,7 +44,7 @@
       <div class="ui calendar time-only">
         <div class="ui fluid input left icon">
           <i class="clock alternate outline icon"></i>
-          <input id="triggerEndTime" type="text" autocomplete="off" placeholder="Time" formControlName="endTime">
+          <input id="triggerEndTime" type="time" autocomplete="off" placeholder="Time" formControlName="endTime">
         </div>
       </div>
     </div>
@@ -53,46 +53,10 @@
   <div class="field" formArrayName="daysOfWeek">
     <label>Days of Week</label>
     <div class="inline fields">
-      <div class="field">
+      <div class="field" *ngFor="let day of daysOfWeek">
         <div class="ui checkbox">
-          <input id="dowMonday" type="checkbox" formControlName="1" />
-          <label for="dowMonday">Monday</label>
-        </div>
-      </div>
-      <div class="field">
-        <div class="ui checkbox">
-          <input id="dowTuesday" type="checkbox" formControlName="2" />
-          <label for="dowTuesday">Tuesday</label>
-        </div>
-      </div>
-      <div class="field">
-        <div class="ui checkbox">
-          <input id="dowWednesday" type="checkbox" formControlName="3" />
-          <label for="dowWednesday">Wednesday</label>
-        </div>
-      </div>
-      <div class="field">
-        <div class="ui checkbox">
-          <input id="dowThursday" type="checkbox" formControlName="4" />
-          <label for="dowThursday">Thursday</label>
-        </div>
-      </div>
-      <div class="field">
-        <div class="ui checkbox">
-          <input id="dowFriday" type="checkbox" formControlName="5" />
-          <label for="dowFriday">Friday</label>
-        </div>
-      </div>
-      <div class="field">
-        <div class="ui checkbox">
-          <input id="dowSaturday" type="checkbox" formControlName="6" />
-          <label for="dowSaturday">Saturday</label>
-        </div>
-      </div>
-      <div class="field">
-        <div class="ui checkbox">
-          <input id="dowSunday" type="checkbox" formControlName="0" />
-          <label for="dowSunday">Sunday</label>
+          <input id="{{ 'dayofweek-' + day.id }}" type="checkbox" [formControlName]="day.id.toString()" />
+          <label for="{{ 'dayofweek-' + day.id }}">{{ day.name }}</label>
         </div>
       </div>
     </div>
