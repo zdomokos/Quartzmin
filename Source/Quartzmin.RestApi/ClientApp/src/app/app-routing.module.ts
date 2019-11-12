@@ -10,32 +10,46 @@ import { JobFormComponent } from './jobs/job-form/job-form.component';
 import { CalendarFormComponent } from './calendars/calendar-form/calendar-form.component';
 import { TriggerFormComponent } from './triggers/trigger-form/trigger-form.component';
 
+export enum TopLevelRoutes {
+  DASHBOARD = 'dashboard',
+  JOBS = 'jobs',
+  CALENDARS = 'calendars',
+  TRIGGERS = 'triggers',
+  HISTORY = 'history',
+  EXECUTIONS = 'executions'
+}
+
+export enum CrudRoutes {
+  CREATE = 'create',
+  EDIT = 'edit'
+}
+
 const routes: Routes = [
-  {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
-  {path: 'dashboard', component: DashboardComponent},
+  {path: '', redirectTo: TopLevelRoutes.DASHBOARD, pathMatch: 'full'},
+  {path: TopLevelRoutes.DASHBOARD, component: DashboardComponent},
   {
-    path: 'jobs', children: [
+    path: TopLevelRoutes.JOBS, children: [
       {path: '', component: JobListComponent},
-      {path: 'create', component: JobFormComponent},
+      {path: CrudRoutes.CREATE, component: JobFormComponent},
       {path: ':jobId/edit', component: JobFormComponent},
     ]
   },
   {
-    path: 'calendars', children: [
+    path: TopLevelRoutes.CALENDARS, children: [
       {path: '', component: CalendarListComponent},
-      {path: 'create', component: CalendarFormComponent},
+      {path: CrudRoutes.CREATE, component: CalendarFormComponent},
       {path: ':calendarId/edit', component: CalendarFormComponent},
     ]
   },
   {
-    path: 'triggers', children: [
+    path: TopLevelRoutes.TRIGGERS, children: [
       {path: '', component: TriggerListComponent},
-      {path: 'create', component: TriggerFormComponent},
+      {path: CrudRoutes.CREATE, component: TriggerFormComponent},
       {path: ':triggerId/edit', component: TriggerFormComponent},
     ]
   },
-  {path: 'history', component: JobHistoryComponent},
-  {path: 'executions', component: ExecutionListComponent},
+  {path: TopLevelRoutes.HISTORY, component: JobHistoryComponent},
+  {path: TopLevelRoutes.EXECUTIONS, component: ExecutionListComponent},
 ];
 
 @NgModule({
