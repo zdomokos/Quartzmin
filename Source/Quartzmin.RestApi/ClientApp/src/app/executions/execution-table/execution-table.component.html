@@ -16,12 +16,12 @@
     <ng-container *ngIf="executions.state == 'complete'">
       <tr *ngFor="let execution of executions.data">
         <td>
-          <a [routerLink]="['/jobs', execution.job.group, execution.job.name, 'edit']">
+          <a [routerLink]="['/jobs', (execution.job.group + '/' + execution.job.name) | appUrlEncode, 'edit']">
             {{ execution.job.group }}.{{ execution.job.name }}
           </a>
         </td>
         <td>
-          <a [routerLink]="['/triggers', execution.trigger.group, execution.trigger.name, 'edit']">
+          <a [routerLink]="['/triggers', (execution.trigger.group + '/' + execution.trigger.name) | appUrlEncode, 'edit']">
             {{ execution.trigger.group }}.{{ execution.trigger.name }}
           </a>
         </td>

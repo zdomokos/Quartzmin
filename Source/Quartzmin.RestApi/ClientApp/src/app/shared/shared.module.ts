@@ -1,3 +1,4 @@
+import { UrlEncodePipe } from './pipes/urlencode.pipe';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AsyncDataWrapperComponent } from './async-data/async-data-wrapper/async-data-wrapper.component';
@@ -19,12 +20,14 @@ export const declareAndExport = [
   declarations: [
     ...declareAndExport,
     DatePipe,
-    DefaultPipe
+    DefaultPipe,
+    UrlEncodePipe,
   ],
   exports: [
     ...declareAndExport,
     DatePipe,
-    DefaultPipe
+    DefaultPipe,
+    UrlEncodePipe,
   ],
   imports: [
     CommonModule

@@ -1,5 +1,8 @@
+import { JobService } from './../job.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { filter, map, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-job-form',
@@ -21,10 +24,30 @@ export class JobFormComponent implements OnInit {
   jobTypes: any[];
   jobGroups: any[];
 
-  constructor(private fb: FormBuilder) {
+  defaultValue = {};
+
+  constructor(private fb: FormBuilder, private route: ActivatedRoute, private jobService: JobService) {
   }
 
   ngOnInit() {
+    this.route.params.pipe(
+      filter(routeParams => routeParams.hasOwnProperty('jobId')),
+      map(routeParams => routeParams.jobId),
+      filter(jobId => jobId != null),
+      switchMap(jobId => this.jobService.getDetail(jobId)),
+    ).subscribe((job: any) => {
+      this.defaultValue = {
+        name: job.name,
+        group: job.group,
+        class: job.jobType,
+        recovery: job.requestsRecovery,
+        description: job.description,
+      };
+
+      this.form.patchValue(this.defaultValue);
+    });
+
+    this.jobService.getGroupNames().subscribe(groups => this.jobGroups = groups);
   }
 
   submitForm() {
@@ -42,6 +65,6 @@ export class JobFormComponent implements OnInit {
   }
 
   resetForm() {
-    this.form.reset();
+    this.form.reset(this.defaultValue);
   }
 }

@@ -12,35 +12,28 @@ import { delay } from 'rxjs/operators';
 export class TriggerService {
   static readonly API_ROOT_URL = `${environment.apiRoot}/triggers`;
   static readonly DETAIL_URL = `${TriggerService.API_ROOT_URL}/{triggerId}`;
+  static readonly GROUP_URL = `${TriggerService.API_ROOT_URL}/groups`;
 
   constructor(private http: HttpClient) { }
 
 
   getAll(): Observable<Trigger[]> {
-    return of([
-      {
-        group: 'test',
-        name: 'test',
-        endTime: new Date(),
-        startTime: new Date(),
-        lastFireTime: new Date(),
-        nextFireTime: null,
-      }
-    ]).pipe(delay(500));
-//    return this.http.get<Trigger[]>(TriggerService.API_ROOT_URL);
+    return this.http.get<Trigger[]>(TriggerService.API_ROOT_URL);
   }
 
   getDetail(): Observable<Trigger> {
     return null;
-
   }
 
   create(trigger: Trigger): Observable<Trigger> {
     return null;
-
   }
 
   update(trigger: Trigger): Observable<Trigger> {
     return null;
+  }
+
+  getGroups(): Observable<string[]> {
+    return this.http.get<string[]>(TriggerService.GROUP_URL);
   }
 }

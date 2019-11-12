@@ -9,7 +9,7 @@ import { Calendar } from '../model/calendar';
   providedIn: 'root'
 })
 export class CalendarService {
-  static readonly API_ROOT_URL = 'calendars';
+  static readonly API_ROOT_URL = 'api/calendars';
   static readonly CALENDAR_DETAIL_URL = `${CalendarService.API_ROOT_URL}/{calendarId}`;
 
   constructor(private http: HttpClient) {

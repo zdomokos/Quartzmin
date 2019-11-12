@@ -1,3 +1,5 @@
+import { JobService } from './../../jobs/job.service';
+import { TriggerService } from './../trigger.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Job } from '../../model/job';
@@ -76,7 +78,11 @@ export class TriggerFormComponent implements OnInit {
   jobs: Job[] = [];
   groups: string[] = [];
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private triggerService: TriggerService,
+    private jobService: JobService,
+  ) {
     this.defaultControls.get('type').valueChanges.pipe().subscribe(type => {
       this.selectedFormGroup = this.specificControls[type];
       this.form = this.selectFormGroup(type);
@@ -109,6 +115,8 @@ export class TriggerFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.triggerService.getGroups().subscribe(groups => this.groups = groups);
+    this.jobService.getAll().subscribe(jobs => this.jobs = jobs);
   }
 
   submitForm() {

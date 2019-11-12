@@ -1,15 +1,14 @@
 export interface ServerInfo {
-  machineName: string;
-  application: string;
-
-  runningSince: Date;
-  inStandByMode: boolean;
-  shutdown: any;
-  started: boolean;
-
-  jobsCount: number;
-  triggersCount: number;
-
+  status: {
+    machineName: string;
+    application: string;
+    version: string;
+    runningSince: Date;
+    inStandbyMode: boolean;
+    shutdown: boolean;
+    started: boolean;
+    historyEnabled: boolean;
+  };
   scheduler: {
     name: string;
     instanceId: string;
@@ -26,9 +25,11 @@ export interface ServerInfo {
     size: number;
     type: string;
   };
-  jobs: {
-    countExecuted: number;
-    countRunning: number;
-    countFailed: number;
-  }
+  stats: {
+    countJobs: number;
+    countTriggers: number;
+    executedJobs: number;
+    runningJobs: number;
+    failedJobs: number;
+  };
 }

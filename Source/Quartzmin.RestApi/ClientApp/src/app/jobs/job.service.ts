@@ -13,9 +13,9 @@ import { Job } from '../model/job';
 export class JobService {
   static readonly API_ROOT_URL = `${environment.apiRoot}/jobs`;
   static readonly JOB_DETAIL_URL = `${JobService.API_ROOT_URL}/{jobId}`;
+  static readonly GROUPS_URL = `${JobService.API_ROOT_URL}/groups`;
 
   constructor(private http: HttpClient) { }
-
 
   getAll(): Observable<Job[]> {
     return this.http.get<Job[]>(JobService.API_ROOT_URL);
@@ -42,5 +42,17 @@ export class JobService {
       { name: 'IMPORT', isPaused: true },
       { name: 'REPORTS', isPaused: false },
     ]);
+  }
+
+  update(job) {
+
+  }
+
+  create(job: Partial<Job>): Observable<Job> {
+    return this.http.post<Job>(JobService.API_ROOT_URL, job);
+  }
+
+  getGroupNames(): Observable<string[]> {
+    return this.http.get<string[]>(JobService.GROUPS_URL);
   }
 }

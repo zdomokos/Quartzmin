@@ -6,17 +6,17 @@
   <h3 class="ui dividing header">Overview</h3>
 
   <div class="ui inverted statistic statistics-executed">
-    <div class="value"><i class="small check icon"></i> {{ data.jobs.countExecuted }}</div>
+    <div class="value"><i class="small check icon"></i> {{ data.stats.executedJobs }}</div>
     <div class="label">Jobs executed</div>
   </div>
 
   <div class="ui inverted statistic statistics-failed">
-    <div class="value"><i class="small close icon"></i> {{ data.jobs.countFailed }}</div>
+    <div class="value"><i class="small close icon"></i> {{ data.stats.failedJobs }}</div>
     <div class="label">Jobs failed</div>
   </div>
 
   <div class="ui inverted statistic statistics-running">
-    <div class="value"><i class="small play icon"></i> {{ data.jobs.countRunning }}</div>
+    <div class="value"><i class="small play icon"></i> {{ data.stats.runningJobs }}</div>
     <div class="label">Jobs executing</div>
   </div>
 
@@ -31,8 +31,8 @@
 
   <div class="ui statistic statistics--no-shadow">
     <div class="inline-stats">
-      <span>{{ data.jobsCount }}</span> jobs<br>
-      <span>{{ data.triggersCount }}</span> triggers
+      <span>{{ data.stats.countJobs }}</span> jobs<br>
+      <span>{{ data.stats.countTriggers }}</span> triggers
     </div>
   </div>
 
@@ -43,19 +43,19 @@
         <tbody>
         <tr>
           <td style="min-width: 220px">In Standby Mode</td>
-          <td>{{ data.inStandByMode }}</td>
+          <td>{{ data.status.inStandbyMode }}</td>
         </tr>
         <tr>
           <td>Running Since</td>
-          <td>{{ data.runningSince | appDate }} UTC</td>
+          <td>{{ data.status.runningSince | appDate }} UTC</td>
         </tr>
         <tr>
           <td>Shutdown</td>
-          <td>{{ data.shutdown }}</td>
+          <td>{{ data.status.shutdown }}</td>
         </tr>
         <tr>
           <td>Started</td>
-          <td>{{ data.started }}</td>
+          <td>{{ data.status.started }}</td>
         </tr>
         </tbody>
       </table>
@@ -92,11 +92,11 @@
     <tbody>
     <tr>
       <td style="min-width: 220px">Machine Name</td>
-      <td>{{ data.machineName }}</td>
+      <td>{{ data.status.machineName }}</td>
     </tr>
     <tr>
       <td>Application</td>
-      <td>{{ data.application }}</td>
+      <td>{{ data.status.application }}</td>
     </tr>
     <tr>
       <td>Scheduler Name</td>
