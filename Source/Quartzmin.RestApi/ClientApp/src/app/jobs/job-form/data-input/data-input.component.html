@@ -6,7 +6,10 @@
     <textarea [ngModel]="value" (ngModelChange)="propagateChangedValue($event)"></textarea>
   </ng-container>
   <ng-container *ngSwitchCase="DataType.boolean">
-    <input type="checkbox" [ngModel]="value" (ngModelChange)="propagateChangedValue($event)" />
+    <div class="ui checkbox toggle">
+      <input type="checkbox" [ngModel]="value" (ngModelChange)="propagateChangedValue($event)" />
+      <label></label>
+    </div>
   </ng-container>
   <!-- TODO: Date, DateTime, File, Boolean, Float-->
 </ng-container>
