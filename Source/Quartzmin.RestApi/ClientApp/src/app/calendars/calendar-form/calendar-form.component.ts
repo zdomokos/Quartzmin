@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormGroup} from "@angular/forms";
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-calendar-form',
@@ -7,10 +7,10 @@ import {FormGroup} from "@angular/forms";
   styleUrls: ['./calendar-form.component.scss']
 })
 export class CalendarFormComponent implements OnInit {
-  form: FormGroup;
+  form: FormGroup = this.fb.group({});
   isEdit;
 
-  constructor() { }
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
   }
