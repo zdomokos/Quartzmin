@@ -28,6 +28,15 @@ namespace Quartzmin.RestApi.Controllers
             var triggerKeys = await this._scheduler.GetJobKeys(GroupMatcher<JobKey>.AnyGroup());
             var runningJobs = await this._scheduler.GetCurrentlyExecutingJobs();
 
+            int? failedJobs = null;
+            int executedJobs = metadata.NumberOfJobsExecuted;
+
+            if (historyStore != null)
+            {
+                executedJobs = await historyStore?.GetTotalJobsExecuted();
+                failedJobs = await historyStore?.GetTotalJobsFailed();
+            }
+
             return Ok(new
             {
                 Status = new
@@ -36,18 +45,36 @@ namespace Quartzmin.RestApi.Controllers
                     RunningSince = metadata.RunningSince?.UtcDateTime ?? null,
                     metadata.Shutdown,
                     metadata.Started,
-                    metadata.SchedulerName,
-                    metadata.SchedulerInstanceId,
-                    metadata.SchedulerRemote,
-                    metadata.SchedulerType,
                     metadata.Version,
                     Environment.MachineName,
+                    Application = Environment.CommandLine,
+                    HistoryEnabled = historyStore != null,
                 },
+                Scheduler = new
+                {
+                    Name  = metadata.SchedulerName,
+                    InstanceId = metadata.SchedulerInstanceId,
+                    Remote = metadata.SchedulerRemote,
+                    Type = metadata.SchedulerType,
+                },
+                JobStore = new 
+                {
+                    Clustered = metadata.JobStoreClustered,
+                    SupportsPersistence = metadata.JobStoreSupportsPersistence,
+                    Type = metadata.JobStoreType,
+                },
+                ThreadPool = new 
+                {
+                    Size = metadata.ThreadPoolSize,
+                    Type = metadata.ThreadPoolType,
+                }, 
                 Stats = new
                 {
-                    ExecutedJobs = metadata.NumberOfJobsExecuted,
+                    CountJobs = jobKeys.Count,
+                    ExecutedJobs = executedJobs,
                     RunningJobs = runningJobs.Count,
-
+                    FailedJobs = failedJobs,
+                    CountTriggers = triggerKeys.Count,
                 }
             });
         }
@@ -74,7 +101,6 @@ namespace Quartzmin.RestApi.Controllers
                     await this._scheduler.ResumeAll();
                     break;
             }
-
 
             return NoContent();
         }

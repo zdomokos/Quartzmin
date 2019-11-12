@@ -7,6 +7,8 @@ using Quartz.Impl.Matchers;
 using Microsoft.AspNetCore.Http;
 using System.Linq;
 using Quartz.Plugins.RecentHistory;
+using System.Net;
+using Quartzmin.RestApi.Dto;
 
 namespace Quartzmin.RestApi.Controllers
 {
@@ -19,6 +21,14 @@ namespace Quartzmin.RestApi.Controllers
         public JobsController(IScheduler scheduler)
         {
             this._scheduler = scheduler ?? throw new ArgumentNullException(nameof(scheduler));
+        }
+
+        [HttpGet("groups")]
+        public async Task<ActionResult<IEnumerable<string>>> GetGroupNames()
+        {
+            var groupNames = await this._scheduler.GetJobGroupNames();
+
+            return Ok(groupNames);
         }
 
         [HttpGet("running")]
@@ -39,7 +49,7 @@ namespace Quartzmin.RestApi.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<object>>> GetSchedulerJobs()
+        public async Task<ActionResult<IEnumerable<JobDto>>> GetSchedulerJobs()
         {
             var jobKeys = await this._scheduler.GetJobKeys(GroupMatcher<JobKey>.AnyGroup());
 
@@ -51,16 +61,16 @@ namespace Quartzmin.RestApi.Controllers
                 var nextFires = triggers.Select(x => x.GetNextFireTimeUtc()?.UtcDateTime).ToArray();
                 Dictionary<string, ExecutionHistoryEntry> historyByJob = await GetJobHistory();
 
-                return new
+                return new JobDto
                 {
-                    name = key.Name,
-                    group = key.Group,
-                    concurrent = !detail.ConcurrentExecutionDisallowed,
-                    persist = detail.PersistJobDataAfterExecution,
-                    recovery = detail.RequestsRecovery,
-                    type = detail.JobType.FullName,
-                    description = detail.Description,
-                    History = historyByJob?.GetValueOrDefault(key.ToString(), null), //.ToHistogram(),
+                    Name = key.Name,
+                    Group = key.Group,
+                    Concurrent = !detail.ConcurrentExecutionDisallowed,
+                    Persist = detail.PersistJobDataAfterExecution,
+                    Recovery = detail.RequestsRecovery,
+                    Type = detail.JobType.FullName,
+                    Description = detail.Description,
+                    // History = historyByJob?.GetValueOrDefault(key.ToString(), null), //.ToHistogram(),
                     NextFireTime = nextFires.Where(x => x != null).OrderBy(x => x).FirstOrDefault()
                 };
             });
@@ -70,17 +80,21 @@ namespace Quartzmin.RestApi.Controllers
             return Ok(jobTuples);
         }
 
-        [HttpGet("{name}")]
-        public async Task<ActionResult> GetSchedulerJobDetail([FromRoute] string name, [FromQuery] string group)
+        [HttpGet("{groupNamePair}")]
+        public async Task<ActionResult> GetSchedulerJobDetail([FromRoute] string groupNamePair)
         {
+            var (group, name) = this.GetGroupAndJobName(groupNamePair);
             var detail = await this.GetJobDetail(name, group);
+
             return Ok(detail);
         }
 
-        [HttpPut("{name}")]
-        public async Task<ActionResult> UpdateSchedulerJobDetail([FromRoute] string name, [FromQuery] string group)
+        [HttpPut("{groupNamePair}")]
+        public async Task<ActionResult> UpdateSchedulerJobDetail([FromRoute] string groupNamePair)
         {
+            var (group, name) = this.GetGroupAndJobName(groupNamePair);
             var detail = await this.GetJobDetail(name, group);
+            
             return Ok(detail);
         }
 
@@ -104,7 +118,7 @@ namespace Quartzmin.RestApi.Controllers
             return Ok();
         }
 
-        [HttpPost("{name}/interrupt")]
+        [HttpPost("{groupNamePair}/interrupt")]
         public async Task<ActionResult> InterruptRunningJob([FromRoute] string name, [FromQuery] string group)
         {
             var jobDetail = await this.GetJobDetail(name, group);
@@ -156,6 +170,14 @@ namespace Quartzmin.RestApi.Controllers
             var historyByJob = history.ToDictionary(x => x.Job);
 
             return historyByJob;
+        }
+
+        private (string, string) GetGroupAndJobName(string encodedUri)
+        {
+            var decoded = WebUtility.UrlDecode(encodedUri);
+            var urlParts = decoded.Split("/");
+
+            return (urlParts[0], urlParts[1]);
         }
     }
 }
