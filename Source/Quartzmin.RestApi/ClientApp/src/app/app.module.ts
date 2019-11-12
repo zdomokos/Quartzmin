@@ -38,6 +38,11 @@ import { ExecutionTableComponent } from './executions/execution-table/execution-
 import { CalendarTableComponent } from './calendars/calendar-table/calendar-table.component';
 import { JobHistoryTableComponent } from './history/job-history-table/job-history-table.component';
 import { NotificationComponent } from './notification/notification.component';
+import { CommonModule } from '@angular/common';
+import { CronTriggerFormComponent } from './triggers/trigger-form/cron-trigger-form/cron-trigger-form.component';
+import { SimpleTriggerFormComponent } from './triggers/trigger-form/simple-trigger-form/simple-trigger-form.component';
+import { CalendarTriggerFormComponent } from './triggers/trigger-form/calendar-trigger-form/calendar-trigger-form.component';
+import { DailyTriggerFormComponent } from './triggers/trigger-form/daily-trigger-form/daily-trigger-form.component';
 
 @NgModule({
   declarations: [
@@ -65,9 +70,14 @@ import { NotificationComponent } from './notification/notification.component';
     ExecutionTableComponent,
     CalendarTableComponent,
     JobHistoryTableComponent,
-    NotificationComponent
+    NotificationComponent,
+    CronTriggerFormComponent,
+    SimpleTriggerFormComponent,
+    CalendarTriggerFormComponent,
+    DailyTriggerFormComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,

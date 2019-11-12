@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { DataType } from '../job-data-map/data-types';
+import { DataType, DataTypeKeys, DataTypeMap } from '../job-data-map/data-types';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -14,13 +14,16 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class DataInputComponent implements ControlValueAccessor {
   @Input()
-  type: keyof(DataType);
+  type: keyof typeof DataType;
 
   @Input()
   placeholder: string;
 
   value;
   valueChangeCallback: any;
+
+  // : Partial<{ [key in keyof typeof DataType]: string }>
+  DataType = DataTypeKeys;
 
   constructor() { }
 

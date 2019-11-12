@@ -20,6 +20,10 @@ export const DataTypeMap = Object.keys(DataType).map(key => {
   };
 });
 
+type DataTypeKeysType = Partial<{ [key in keyof typeof DataType]: string }>;
+
+export const DataTypeKeys = Object.keys(DataType).reduce<DataTypeKeysType>((acc, key) => ({ ...acc, ...{ [key]: key } }), {});
+
 export const dataTypes = [
   { name: 'String' },
   { name: 'String (multiline)' },
