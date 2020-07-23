@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Globalization;
 
 #region Target-Specific Directives
-#if NETSTANDARD
+#if ( NETSTANDARD || NETCOREAPP )
 using Microsoft.AspNetCore.Mvc;
 #endif
 #if NETFRAMEWORK
@@ -63,13 +63,14 @@ namespace Quartzmin.Controllers
                 History = histogram,
                 MetaData = metadata,
                 RunningSince = metadata.RunningSince?.UtcDateTime.ToDefaultFormat() ?? "N / A",
+                UtcLabel = DateTimeSettings.UseLocalTime ? string.Empty : "UTC",
                 Environment.MachineName,
                 Application = Environment.CommandLine,
                 JobsCount = jobKeys.Count,
                 TriggerCount = triggerKeys.Count,
                 ExecutingJobs = currentlyExecutingJobs.Count,
                 ExecutedJobs = executedJobs,
-                FailedJobs = failedJobs?.ToString(CultureInfo.InvariantCulture) ?? "N/A",
+                FailedJobs = failedJobs?.ToString(CultureInfo.InvariantCulture) ?? "N / A",
                 JobGroups = pausedJobGroups,
                 TriggerGroups = pausedTriggerGroups,
                 HistoryEnabled = histStore != null,
