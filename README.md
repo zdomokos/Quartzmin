@@ -7,7 +7,10 @@
 [![NuGet](https://img.shields.io/nuget/v/QuartzminFork.svg)](https://www.nuget.org/packages/QuartzminFork)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-QuartzminFork is  fork from Quartzmin!
+### Quartzmin is  fork from original Quartzmin!
+Few pull requests are merged:
+- [.net core 3.1 support](https://github.com/jlucansky/Quartzmin/pull/27)
+- [SqlServer history plugin](https://github.com/jlucansky/Quartzmin/pull/10)
 
 
 Quartzmin is powerful, easy to use web management tool for Quartz.NET
