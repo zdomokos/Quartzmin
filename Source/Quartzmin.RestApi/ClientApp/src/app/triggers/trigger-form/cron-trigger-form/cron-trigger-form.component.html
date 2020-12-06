@@ -1,0 +1,18 @@
+<div class="cron trigger-type" [formGroup]="formGroup">
+  <div class="fields">
+    <div class="seven wide field accept-error cron-field">
+      <label for="cron-expression">Cron Expression <a href="http://cronmaker.com" target="_blank">
+        <i class="external alternate icon"></i>http://cronmaker.com</a>
+      </label>
+      <input type="text" placeholder="Cron Expression" id="cron-expression" formControlName="cronExpression" />
+      <div style="float: right; cursor:pointer; display: none" id="next-cron-dates"><i class="eye icon"></i></div>
+      <p id="cron-desc"></p>
+    </div>
+    <div class="nine wide field accept-error">
+      <label for="triggerTimeZone">Time Zone</label>
+      <mat-select class="ui fluid search fulltext selection dropdown allow-empty" id="triggerTimeZone" formControlName="timezone">
+        <option value="">--- Not Set ---</option>
+      </mat-select>
+    </div>
+  </div>
+</div>

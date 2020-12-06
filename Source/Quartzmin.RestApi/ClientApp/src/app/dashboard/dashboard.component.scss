@@ -1,0 +1,97 @@
+.dashboard {
+  .ui.dividing.header {
+    margin-bottom: 0;
+    margin-top: 0;
+  }
+
+  .ui.table {
+    margin-top: 5px;
+  }
+
+  & > .ui.grid {
+    margin: 0;
+  }
+
+  & > .ui.grid > .column {
+    padding: 14px 0 0 !important;
+  }
+
+  .ui.statistic {
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 1px 2px 4px rgba(0,0,0,0.15);
+  }
+
+  .ui.inverted.statistic {
+    text-shadow: 1px 2px 4px rgba(0,0,0,0.25);
+  }
+
+  .ui.statistics--no-shadow {
+    box-shadow: none;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  #scheduler-dashboard .ui.table:not(.unstackable) td:first-child, .ui.table:not(.unstackable) th:first-child {
+    font-weight: normal;
+  }
+}
+
+#scheduler-dashboard #msg-panel:not(:empty) {
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+#scheduler-dashboard #col-actions .ui.button {
+  margin-bottom: 5px;
+}
+
+
+.dashboard-histogram .histogram {
+  height: 100%;
+}
+
+.dashboard-histogram {
+  display: inline-flex;
+}
+
+.dashboard-histogram .histogram > .bar {
+  width: 13px;
+}
+
+#scheduler-dashboard .ui.table {
+  width: auto;
+  border: none;
+
+}
+
+#scheduler-dashboard .ui.table>tbody>tr>td:nth-child(2) {
+  font-weight: bold;
+}
+
+.statistics-executed {
+  background-color: #0c5a0c;
+  background-image: linear-gradient(#107c10, #0c5a0c);
+}
+
+.statistics-failed {
+  background-color: #c42121;
+  background-image: linear-gradient(#db2828, #c42121);
+}
+
+.statistics-running {
+  background-color: #1c70b0;
+  background-image: linear-gradient(#2185d0, #1c70b0);
+}
+
+.statistics-histogram {
+  background-color: #f0f0f0;
+}
+
+.dashboard-histogram {
+  height: 50px;
+}
+
+.dashboard-actions-container {
+  margin-top: 1em;
+}

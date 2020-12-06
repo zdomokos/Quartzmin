@@ -1,0 +1,20 @@
+<div class="ui inverted page dimmer" id="dimmer">
+  <div class="ui loader"></div>
+</div>
+<form class="ui form" [formGroup]="form">
+  <div class="ui clearing basic segment" style="padding: 0" id="header">
+    <div style="float: right">
+      <a class="ui button" id="btn-discard">Discard Changes</a>
+      <div *ngIf="isEdit" class="negative ui button" id="btn-delete">Delete</div>
+      <div class="ui primary button" id="btn-save">Save</div>
+    </div>
+    <h1 class="ui left floated header">
+      <ng-container *ngIf="isEdit; else newCalendar">Edit Calendar</ng-container>
+      <ng-template #newCalendar>Add Calendar</ng-template>
+    </h1>
+  </div>
+
+  <div id="msg-panel"></div>
+
+  <div class="ui segments" id="seg-root"></div>
+</form>

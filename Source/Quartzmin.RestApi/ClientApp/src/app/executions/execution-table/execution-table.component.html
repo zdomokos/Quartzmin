@@ -1,0 +1,39 @@
+<table class="ui single line table highlight-rows">
+  <thead>
+    <tr>
+      <th scope="col">Job</th>
+      <th scope="col">Trigger</th>
+      <th scope="col">Scheduled Fire Time</th>
+      <th scope="col">Actual Fire Time</th>
+      <th scope="col">Run Time</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngIf="executions.loading">
+      <td colspan="6">Loading...</td>
+    </tr>
+    <ng-container *ngIf="executions.state == 'complete'">
+      <tr *ngFor="let execution of executions.data">
+        <td>
+          <a [routerLink]="['/jobs', (execution.job.group + '/' + execution.job.name) | appUrlEncode, 'edit']">
+            {{ execution.job.group }}.{{ execution.job.name }}
+          </a>
+        </td>
+        <td>
+          <a [routerLink]="['/triggers', (execution.trigger.group + '/' + execution.trigger.name) | appUrlEncode, 'edit']">
+            {{ execution.trigger.group }}.{{ execution.trigger.name }}
+          </a>
+        </td>
+        <td>{{ execution.scheduledFireTime }}</td>
+        <td>{{ execution.actualFireTime }}</td>
+        <td>{{ execution.runTime }}</td>
+        <td class="interrupt">
+          <button class="ui super tiny red button btn-interrupt" (click)="interrupt.emit(execution)">
+            <i class="stop icon"></i>Interrupt
+          </button>
+        </td>
+      </tr>
+    </ng-container>
+  </tbody>
+</table>

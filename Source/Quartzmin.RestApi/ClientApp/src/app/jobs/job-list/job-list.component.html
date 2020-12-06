@@ -1,0 +1,37 @@
+<ng-container *ngIf="jobs$ | async as data">
+  <div class="ui inverted page dimmer" id="dimmer"><div class="ui loader"></div></div>
+  <div class="ui small left icon input">
+    <input type="text" placeholder="Search Job..." id="search-job">
+    <i class="search icon"></i>
+  </div>
+  <span>&nbsp;</span>
+  <div class="ui small floating dropdown labeled search icon button" id="job-group-filter">
+    <i class="filter icon"></i>
+    <span class="text">Job Group</span>
+    <div class="menu">
+      <div class="header">
+        Filter by group
+      </div>
+      <div class="divider"></div>
+      <div class="item" data-show-all="true"><i>All</i></div>
+      <div class="item" *ngFor="let group of []">{{ group }}</div>
+    </div>
+  </div>
+  <a class="ui right floated primary button" [routerLink]="'/jobs/create'">
+    <i class="plus icon"></i>New
+  </a>
+
+  <div id="msg-panel"></div>
+
+  <app-job-table [jobs]="jobs$ | async"></app-job-table>
+</ng-container>
+<ng-template #menu>
+  <div>
+    <div class="ui small vertical menu borderless" id="job-context-menu">
+      <a class="item menu-edit"><i class="left large blue pencil alternate icon"></i>Edit</a>
+      <a class="item menu-copy"><i class="left large clone outline icon"></i>Copy</a>
+      <a class="item menu-trigger"><i class="left large green play icon"></i>Trigger</a>
+      <a class="item menu-delete"><i class="left large red trash alternate outline icon"></i>Delete</a>
+    </div>
+  </div>
+</ng-template>

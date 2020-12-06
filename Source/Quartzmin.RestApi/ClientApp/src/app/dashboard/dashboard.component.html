@@ -1,0 +1,167 @@
+<div class="ui inverted page dimmer" id="dimmer"><div class="ui loader"></div></div>
+
+<div class="dashboard" id="scheduler-dashboard" *ngIf="(data$ | async) as data">
+  <div id="msg-panel"></div>
+
+  <h3 class="ui dividing header">Overview</h3>
+
+  <div class="ui inverted statistic statistics-executed">
+    <div class="value"><i class="small check icon"></i> {{ data.stats.executedJobs }}</div>
+    <div class="label">Jobs executed</div>
+  </div>
+
+  <div class="ui inverted statistic statistics-failed">
+    <div class="value"><i class="small close icon"></i> {{ data.stats.failedJobs }}</div>
+    <div class="label">Jobs failed</div>
+  </div>
+
+  <div class="ui inverted statistic statistics-running">
+    <div class="value"><i class="small play icon"></i> {{ data.stats.runningJobs }}</div>
+    <div class="label">Jobs executing</div>
+  </div>
+
+  <div class="ui statistic statistics-histogram">
+    <div class="value">
+      <div class="dashboard-histogram">
+        <!-- TODO  {{>Histogram History}} -->
+      </div>
+    </div>
+    <div class="label">Latest Activity</div>
+  </div>
+
+  <div class="ui statistic statistics--no-shadow">
+    <div class="inline-stats">
+      <span>{{ data.stats.countJobs }}</span> jobs<br>
+      <span>{{ data.stats.countTriggers }}</span> triggers
+    </div>
+  </div>
+
+  <div class="ui stackable grid">
+    <div class="seven wide column" style="padding-right: 14px !important">
+      <h3 class="ui dividing header">Status</h3>
+      <table class="ui table">
+        <tbody>
+        <tr>
+          <td style="min-width: 220px">In Standby Mode</td>
+          <td>{{ data.status.inStandbyMode }}</td>
+        </tr>
+        <tr>
+          <td>Running Since</td>
+          <td>{{ data.status.runningSince | appDate }} UTC</td>
+        </tr>
+        <tr>
+          <td>Shutdown</td>
+          <td>{{ data.status.shutdown }}</td>
+        </tr>
+        <tr>
+          <td>Started</td>
+          <td>{{ data.status.started }}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="nine wide column" id="col-actions">
+      <h3 class="ui dividing header">Actions</h3>
+
+      <div class="dashboard-actions-container">
+        <ng-container *ngIf="data.inStandByMode; else notStandByButton">
+          <button class="ui small button green" id="btn-start" (click)="start()"><i class="play icon"></i>Start</button>
+        </ng-container>
+        <ng-template #notStandByButton>
+          <button class="ui small button grey" id="btn-standby" (click)="standBy()"><i class="stop icon"></i>Standby</button>
+        </ng-template>
+        <button class="ui small button red" id="btn-shutdown" (click)="shutdown()"><i class="power icon"></i>Shutdown</button>
+        <button class="ui small button" id="btn-pause" (click)="pauseAll()"><i class="pause icon"></i>Pause All</button>
+        <button class="ui small button" id="btn-resume" (click)="resumeAll()"><i class="play icon"></i>Resume All</button>
+      </div>
+
+      <app-group-actions
+        header="Job Groups"
+        [groups]="jobGroups$ | async">
+      </app-group-actions>
+
+      <app-group-actions
+        header="Trigger Groups"
+        [groups]="triggerGroups$ | async">
+      </app-group-actions>
+    </div>
+  </div>
+
+  <h3 class="ui dividing header">Node Info</h3>
+  <table class="ui table">
+    <tbody>
+    <tr>
+      <td style="min-width: 220px">Machine Name</td>
+      <td>{{ data.status.machineName }}</td>
+    </tr>
+    <tr>
+      <td>Application</td>
+      <td>{{ data.status.application }}</td>
+    </tr>
+    <tr>
+      <td>Scheduler Name</td>
+      <td>{{ data.scheduler.name }}</td>
+    </tr>
+    <tr>
+      <td>Scheduler Instance Id</td>
+      <td>{{ data.scheduler.instanceId }}</td>
+    </tr>
+    <tr>
+      <td>Scheduler Remote</td>
+      <td>{{ data.scheduler.remote}}</td>
+    </tr>
+    <tr>
+      <td>Scheduler Type</td>
+      <td>{{ data.scheduler.type }}</td>
+    </tr>
+    <tr>
+      <td>Version</td>
+      <td>{{ data.scheduler.version }}</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <h3 class="ui dividing header">Job Store</h3>
+  <table class="ui table">
+    <tbody>
+    <tr>
+      <td style="min-width: 220px">Job Store Clustered</td>
+      <td>{{ data.jobStore.clustered }}</td>
+    </tr>
+    <tr>
+      <td>Job Store Supports Persistence</td>
+      <td>{{ data.jobStore.supportsPersistence }}</td>
+    </tr>
+    <tr>
+      <td>Job Store Type</td>
+      <td>{{ data.jobStore.type }}</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <h3 class="ui dividing header">Thread Pool</h3>
+  <table class="ui table">
+    <tbody>
+    <tr>
+      <td style="min-width: 220px">Thread Pool Size</td>
+      <td>{{ data.threadPool.size }}</td>
+    </tr>
+    <tr>
+      <td>Thread Pool Type</td>
+      <td>{{ data.threadPool.type }}</td>
+    </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<div class="ui mini modal" id="shutdown-dialog">
+  <div class="content">
+    <p>Are you sure you want to shut down Quartz Scheduler?</p>
+    <p>This action <b>is not reversible</b> which means, you will not be able to connect to this page any more!</p>
+  </div>
+  <div class="actions">
+    <div class="ui approve red button">Shutdown</div>
+    <div class="ui cancel button">Cancel</div>
+  </div>
+</div>

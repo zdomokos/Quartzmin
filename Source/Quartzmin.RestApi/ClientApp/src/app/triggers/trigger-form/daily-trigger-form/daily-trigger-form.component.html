@@ -1,0 +1,64 @@
+<div class="daily trigger-type" [formGroup]="formGroup">
+  <div class="fields">
+    <div class="four wide field accept-error">
+      <label for="triggerDailyRepeatInterval">Repeat Interval</label>
+      <input id="triggerDailyRepeatInterval" type="text" placeholder="Repeat Interval"  />
+    </div>
+    <div class="three wide field accept-error">
+      <label>Unit</label>
+    </div>
+    <div class="nine wide field accept-error">
+      <label for="triggerDailyTimezone">Time Zone</label>
+      <mat-select id="triggerDailyTimezone" class="ui fluid search fulltext selection dropdown allow-empty">
+        <mat-option [value]="null">--- Not Set ---</mat-option>
+      </mat-select>
+    </div>
+  </div>
+
+  <div class="fields">
+    <div class="four wide field accept-error">
+      <label for="triggerDailyRepeatCount">Repeat Count</label>
+      <input id="triggerDailyRepeatCount" type="number" placeholder="Repeat Count" formControlName="repeatCount" />
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="ui checkbox">
+      <input id="triggerDailyRepeatForever" type="checkbox" formControlName="repeatForever">
+      <label for="triggerDailyRepeatForever">Repeat Forever</label>
+    </div>
+  </div>
+
+  <div class="fields">
+    <div class="four wide field accept-error">
+      <label for="triggerStartTime">Start Time of Day</label>
+      <div class="ui calendar time-only">
+        <div class="ui fluid input left icon">
+          <i class="clock alternate outline icon"></i>
+          <input id="triggerStartTime" type="time" autocomplete="off" placeholder="Time" formControlName="startTime">
+        </div>
+      </div>
+    </div>
+    <div class="four wide field accept-error">
+      <label for="triggerEndTime">End Time of Day</label>
+      <div class="ui calendar time-only">
+        <div class="ui fluid input left icon">
+          <i class="clock alternate outline icon"></i>
+          <input id="triggerEndTime" type="time" autocomplete="off" placeholder="Time" formControlName="endTime">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="field" formArrayName="daysOfWeek">
+    <label>Days of Week</label>
+    <div class="inline fields">
+      <div class="field" *ngFor="let day of daysOfWeek">
+        <div class="ui checkbox">
+          <input id="{{ 'dayofweek-' + day.id }}" type="checkbox" [formControlName]="day.id.toString()" />
+          <label for="{{ 'dayofweek-' + day.id }}">{{ day.name }}</label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

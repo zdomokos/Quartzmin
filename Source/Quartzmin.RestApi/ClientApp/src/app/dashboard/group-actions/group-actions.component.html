@@ -1,0 +1,12 @@
+<div class="group-actions">
+  <h4 class="ui dividing header">{{ header }}</h4>
+  <ul>
+    <li *ngFor="let group of groups" [ngClass]="getGroupClass(group)">
+      {{ group.name }}
+      <button class="ui super tiny button">
+        <i class="icon" [ngClass]="getButtonClass(group)"></i>
+        {{ getGroupText(group) }}
+      </button>
+    </li>
+  </ul>
+</div>

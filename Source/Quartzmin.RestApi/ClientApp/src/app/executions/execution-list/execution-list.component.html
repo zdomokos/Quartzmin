@@ -1,0 +1,7 @@
+<ng-container *ngIf="executions$ | async as executions">
+  <div class="ui inverted page dimmer" id="dimmer"><div class="ui loader"></div></div>
+
+  <div id="msg-panel"></div>
+
+  <app-execution-table [executions]="executions$ | async" (interrupt)="interrupt($event)"></app-execution-table>
+</ng-container>

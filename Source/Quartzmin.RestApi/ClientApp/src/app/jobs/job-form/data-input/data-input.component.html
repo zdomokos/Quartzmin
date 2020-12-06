@@ -1,0 +1,15 @@
+<ng-container [ngSwitch]="type">
+  <ng-container *ngSwitchDefault>
+    <input type="text" [ngModel]="value" (ngModelChange)="propagateChangedValue($event)" />
+  </ng-container>
+  <ng-container *ngSwitchCase="DataType.stringMultiline">
+    <textarea [ngModel]="value" (ngModelChange)="propagateChangedValue($event)"></textarea>
+  </ng-container>
+  <ng-container *ngSwitchCase="DataType.boolean">
+    <div class="ui checkbox toggle">
+      <input type="checkbox" [ngModel]="value" (ngModelChange)="propagateChangedValue($event)" />
+      <label></label>
+    </div>
+  </ng-container>
+  <!-- TODO: Date, DateTime, File, Boolean, Float-->
+</ng-container>

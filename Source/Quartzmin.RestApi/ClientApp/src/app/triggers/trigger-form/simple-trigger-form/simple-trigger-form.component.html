@@ -1,0 +1,29 @@
+<div class="simple trigger-type" [formGroup]="formGroup">
+  <div class="fields">
+    <div class="four wide field accept-error">
+      <label for="repeatInterval">Repeat Interval</label>
+      <input type="text" placeholder="Repeat Interval" id="repeatInterval" formControlName="repeatInterval" />
+    </div>
+    <div class="three wide field accept-error">
+      <label>Unit</label>
+      <mat-select formControlName="repeatUnit">
+
+      </mat-select>
+    </div>
+  </div>
+
+  <div class="fields">
+    <div class="four wide field accept-error">
+      <label for="triggerSimpleRepeatCount">Repeat Count</label>
+      <input type="text" placeholder="Repeat Count" id="triggerSimpleRepeatCount" formControlName="repeatCount" />
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="ui checkbox">
+      <input id="triggerSimpleRepeatForever" type="checkbox" formControlName="repeatForever" />
+      <label for="triggerSimpleRepeatForever">Repeat Forever</label>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,36 @@
+<table class="ui very basic single line table" id="job-data-map" [formGroup]="form">
+  <thead>
+    <tr>
+      <th scope="col" class="six wide">Name</th>
+      <th scope="col" class="six wide">Value</th>
+      <th scope="col" class="six four">Type</th>
+    </tr>
+  </thead>
+  <tbody>
+  <ng-container formArrayName="dataMap" *ngFor="let type of dataMap.controls; let i = index;">
+    <tr [formGroupName]="i.toString()">
+      <td class="name-col field accept-error">
+        <input type="text" placeholder="Parameter Name" autocomplete="off" formControlName="name">
+      </td>
+      <td class="value-col field accept-error">
+        <app-data-input
+          placeholder="Provide value"
+          [type]="dataMap.controls[i].get('type').value"
+          formControlName="value"
+        >
+        </app-data-input>
+        <!-- {{RenderJobDataMapValue @Services item}} -->
+      </td>
+      <td class="type-col">
+        <mat-select placeholder="Select Type" formControlName="type">
+          <mat-option *ngFor="let type of supportedTypes" [value]="type.value">
+            {{ type.name }}
+          </mat-option>
+        </mat-select>
+        <a href="javascript:void(0)" (click)="cloneItem(i)" class="copy-row" title="Copy"><i class="large black copy outline icon"></i></a>
+        <a href="javascript:void(0)" (click)="removeItem(i)" class="delete-row" title="Delete"><i class="red large trash alternate outline icon"></i></a>
+      </td>
+    </tr>
+  </ng-container>
+  </tbody>
+</table>

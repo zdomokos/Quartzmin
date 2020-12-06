@@ -1,0 +1,10 @@
+<div class="ui mini modal visible active">
+  <div class="content">
+    <p>{{ text }}</p>
+    <p><b class="confirm-item"></b></p>
+  </div>
+  <div class="actions">
+    <div class="ui approve red button" (click)="confirm()">{{ confirmText }}</div>
+    <div class="ui cancel button" (click)="cancel()">{{ cancelText }}</div>
+  </div>
+</div>

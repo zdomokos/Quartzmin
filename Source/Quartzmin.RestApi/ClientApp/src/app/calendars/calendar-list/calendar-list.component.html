@@ -1,0 +1,12 @@
+<div class="ui inverted page dimmer" id="dimmer"><div class="ui loader"></div></div>
+<div class="ui small left icon input">
+  <input type="text" placeholder="Search Calendar..." id="search-calendar">
+  <i class="search icon"></i>
+</div>
+<a class="ui right floated primary button" [routerLink]="[CrudRoutes.CREATE]">
+  <i class="plus icon"></i>New
+</a>
+
+<div id="msg-panel"></div>
+
+<app-calendar-table [calendars]="calendars$ | async"></app-calendar-table>

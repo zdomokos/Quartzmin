@@ -1,0 +1,6 @@
+<div class="ui message" [ngClass]="cssClass">
+  <i *ngIf="showCloseIcon" class="close icon"></i>
+  <i *ngIf="type === 'info'" class="circle icon info"></i>
+  <div class="header" *ngIf="header != null">{{ header }}</div>
+  {{ text }}
+</div>

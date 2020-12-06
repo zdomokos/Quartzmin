@@ -1,0 +1,35 @@
+<table class="ui single line table highlight-rows" id="calendar-list">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container [ngSwitch]="calendars.state">
+      <ng-container *ngSwitchCase="'loading'">
+        <tr>
+          <td colspan="5">Loading...</td>
+        </tr>
+      </ng-container>
+      <ng-container *ngSwitchCase="'error'">
+        <tr>
+          <td colspan="5">Error: {{ calendars.error }}</td>
+        </tr>
+      </ng-container>
+      <ng-container *ngSwitchCase="'complete'">
+        <tr *ngIf="calendars.data.length === 0">
+          <td colspan="5">No data</td>
+        </tr>
+        <tr *ngFor="let calendar of calendars.data">
+          <td class="cal-name"><a [routerLink]="['edit', calendar.name]">{{ calendar.name }}</a></td>
+          <td class="cal-desc">{{ calendar.description }}</td>
+          <td class="cal-type">
+            <img class="ui inline image" src="Content/Images/type.png">&nbsp;{{ calendar.type }}
+          </td>
+        </tr>
+      </ng-container>
+    </ng-container>
+  </tbody>
+</table>

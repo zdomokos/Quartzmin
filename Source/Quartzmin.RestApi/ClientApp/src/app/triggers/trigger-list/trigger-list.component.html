@@ -1,0 +1,96 @@
+<div class="ui inverted page dimmer" id="dimmer"><div class="ui loader"></div></div>
+<div class="ui small left icon input">
+  <input type="text" placeholder="Search Trigger..." id="search-trigger">
+  <i class="search icon"></i>
+</div>
+<span>&nbsp;</span>
+<div class="ui small floating dropdown labeled search icon button" id="trigger-group-filter">
+  <i class="filter icon"></i>
+  <span class="text">Trigger Group</span>
+  <div class="menu">
+    <div class="header">
+      Filter by group
+    </div>
+    <div class="divider"></div>
+    <div class="item" data-show-all="true"><i>All</i></div>
+    <div class="item" *ngFor="let group of []">{{ group }}</div>
+  </div>
+</div>
+<a class="ui right floated primary button" [routerLink]="'/triggers/create'">
+  <i class="plus icon"></i>New
+</a>
+
+<div id="msg-panel"></div>
+
+<table class="ui single line table highlight-rows" id="trigger-list">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Group</th>
+    <th>Schedule</th>
+    <th>Start Time</th>
+    <th>End Time</th>
+    <th>Last Fire Time</th>
+    <th>Next Fire Time</th>
+    <th>History</th>
+  </tr>
+  </thead>
+  <ng-container *ngIf="(triggers$ | async) as resolvedData">
+  <tbody app-async-data-wrapper [data]="resolvedData">
+    <ng-container *appAsyncDataSuccess="let triggers">
+      <ng-container *ngFor="let trigger of triggers">
+        <ng-container *ngIf="jobSeparator">
+          <tr class="job-key">
+            <td class="job-name">
+              <a [routerLink]="['jobs', job.group, job.name, 'edit']">{{ job }}</a>
+            </td>
+            <td class="job-group">{{ job.group }}</td>
+            <td colspan="6" style="text-align: right">
+              <a (click)="pauseAll()" class="ui super tiny button btn-pause-all"><i class="pause icon"></i>Pause All</a>
+              <a (click)="resumeAll()" class="ui super tiny button btn-resume-all"><i class="play icon"></i>Resume All</a>
+            </td>
+          </tr>
+        </ng-container>
+
+        <tr>
+          <td class="trigger-name">
+            <i *ngIf="trigger.isPaused" class="small pause icon" title="Paused"></i>
+            <a [routerLink]="['triggers', trigger.group, trigger.name, 'edit']" title="{{ trigger.description }}">{{ trigger.name }}</a>
+          </td>
+          <td class="trigger-group">{{ trigger.group }}</td>
+          <td class="schedule-desc"> <!--  data-content="{{ScheduleDescription}}" -->
+            <i [ngClass]="trigger.typeIcon" class="icon"></i>{{ trigger.typeString }}
+          </td>
+          <td class="trigger-start">{{ trigger.startTime | appDate | appDefault: 'N/A' }}</td>
+          <td class="trigger-end">{{ trigger.endTime | appDate | appDefault: 'N/A'  }}</td>
+          <td class="trigger-last-fire">{{ trigger.lastFireTime | appDate | appDefault: 'N/A'  }}</td>
+          <td class="trigger-next-fire">{{ trigger.nextFireTime | appDate | appDefault: 'N/A'  }}</td>
+          <td class="trigger-histogram"><app-histogram></app-histogram></td>
+        </tr>
+      </ng-container>
+    </ng-container>
+    <ng-container *appAsyncDataError="let error">
+      <tr>
+        <td>{{ error }}</td>
+      </tr>
+    </ng-container>
+    <ng-container *appAsyncDataLoading>
+      <tr>
+        <td colspan="8">
+          Loading...
+        </td>
+      </tr>
+    </ng-container>
+    </tbody>
+  </ng-container>
+</table>
+
+<div style="display:none">
+  <div class="ui small vertical menu borderless" id="trigger-context-menu">
+    <a class="item menu-edit"><i class="left large blue pencil alternate icon"></i>Edit</a>
+    <a class="item menu-copy"><i class="left large clone outline icon"></i>Copy</a>
+    <a class="item menu-pause"><i class="left large pause icon" style="color:#e6b800"></i>Pause</a>
+    <a class="item menu-resume"><i class="left large play green icon"></i>Resume</a>
+    <a class="item menu-delete"><i class="left large red trash alternate outline icon"></i>Delete</a>
+  </div>
+</div>

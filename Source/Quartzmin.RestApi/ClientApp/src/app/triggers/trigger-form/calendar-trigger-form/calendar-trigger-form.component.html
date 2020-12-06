@@ -1,0 +1,31 @@
+<div class="calendar trigger-type" [formGroup]="formGroup">
+  <div class="fields">
+    <div class="four wide field accept-error">
+      <label for="triggerCalendarRepeatInterval">Repeat Interval</label>
+      <input type="text" id="triggerCalendarRepeatInterval" placeholder="Repeat Interval" />
+    </div>
+    <div class="three wide field accept-error">
+      <label>Unit</label>
+    </div>
+    <div class="nine wide field accept-error">
+      <label for="triggerCalendarTimezone">Time Zone</label>
+      <select id="triggerCalendarTimezone" class="ui fluid search fulltext selection dropdown allow-empty">
+        <option value="">--- Not Set ---</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="ui checkbox">
+      <input id="preserveHourAcrossDst" type="checkbox" formControlName="preserveHourAcrossDst" />
+      <label for="preserveHourAcrossDst">Preserve Hour of Day Across Daylight Savings</label>
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="ui checkbox">
+      <input id="skipDayIfHourDoesNotExist" type="checkbox" formControlName="skipDayIfHourDoesNotExist" />
+      <label for="skipDayIfHourDoesNotExist">Skip Day If Hour Does Not Exist</label>
+    </div>
+  </div>
+</div>
