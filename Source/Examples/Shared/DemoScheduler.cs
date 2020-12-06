@@ -2,6 +2,7 @@
 using Quartz.Impl;
 using Quartz.Impl.Matchers;
 using System;
+using System.Collections.Specialized;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
@@ -12,8 +13,45 @@ namespace Quartzmin
     {
         public static async Task<IScheduler> Create(bool start = true)
         {
-            var scheduler = await StdSchedulerFactory.GetDefaultScheduler();
+            NameValueCollection properties = new NameValueCollection
+            {
+                ["quartz.scheduler.instanceName"] = "TestScheduler",
+                ["quartz.scheduler.instanceId"] = "1",
+                ["quartz.jobStore.type"] = "Quartz.Impl.AdoJobStore.JobStoreTX, Quartz",
+                //["quartz.jobStore.use"] = "true",
+                ["quartz.jobStore.dataSource"] = "ztg",
+                ["quartz.jobStore.tablePrefix"] = "qrtz_",
+                ["quartz.jobStore.misfireThreshold"] = "60000",
+                ["quartz.jobStore.driverDelegateType"] = "Quartz.Impl.AdoJobStore.PostgreSQLDelegate, Quartz",
+                ["quartz.serializer.type"] = "json",
+                // if running MS SQL Server we need this
+                //["quartz.jobStore.lockHandler.type"] = "Quartz.Impl.AdoJobStore.UpdateLockRowSemaphore, Quartz",
 
+                ["quartz.dataSource.ztg.provider"] = "Npgsql",
+                ["quartz.dataSource.ztg.connectionString"] = "Server=localhost;Port=5432;Database=ZtgAts;Username=postgres;Password=xyz;",
+
+                ["quartz.dbprovider.Npgsql.productName"] = "Npgsql",
+                ["quartz.dbprovider.Npgsql.assemblyName"] = "Npgsql, Version=4.1.6.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7",
+                ["quartz.dbprovider.Npgsql.connectionType"] = "Npgsql.NpgsqlConnection, Npgsql, Version=4.1.6.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7",
+                ["quartz.dbprovider.Npgsql.commandType"] = "Npgsql.NpgsqlCommand, Npgsql, Version=4.1.6.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7",
+                ["quartz.dbprovider.Npgsql.parameterType"] = "Npgsql.NpgsqlParameter, Npgsql, Version=4.1.6.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7",
+                ["quartz.dbprovider.Npgsql.parameterDbType"] = "NpgsqlTypes.NpgsqlDbType, Npgsql, Version=4.1.6.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7",
+                ["quartz.dbprovider.Npgsql.parameterDbTypePropertyName"] = "NpgsqlDbType",
+                ["quartz.dbprovider.Npgsql.parameterNamePrefix"] = ":",
+                ["quartz.dbprovider.Npgsql.exceptionType"] = "Npgsql.NpgsqlException, Npgsql, Version=4.1.6.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7",
+                ["quartz.dbprovider.Npgsql.useParameterNamePrefixInParameterCollection"] = "true",
+                ["quartz.dbprovider.Npgsql.bindByName"] = "true",
+            };
+
+
+
+            // First we must get a reference to a scheduler
+            //var sf = new StdSchedulerFactory(properties);
+            //var scheduler = await sf.GetDefaultScheduler();
+            var sf = new StdSchedulerFactory(properties);
+            var scheduler = await sf.GetScheduler();
+
+            /*
             {
                 var jobData = new JobDataMap();
                 jobData.Put("DateFrom", DateTime.Now);
@@ -25,8 +63,7 @@ namespace Quartzmin
                     .UsingJobData(jobData)
                     .StoreDurably()
                     .Build();
-                var trigger = TriggerBuilder.Create()
-                    .WithIdentity("MorningSales")
+                var trigger = TriggerBuilder.Create()                    .WithIdentity("MorningSales")
                     .StartNow()
                     .WithCronSchedule("0 0 8 1/1 * ? *")
                     .Build();
@@ -103,10 +140,13 @@ namespace Quartzmin
                     .WithIdentity("CSV_big", "LONGRUNNING")
                     .ForJob(job)
                     .StartNow()
-                    .WithDailyTimeIntervalSchedule(x=>x.OnMondayThroughFriday())
+                    .WithDailyTimeIntervalSchedule(x => x.OnMondayThroughFriday())
                     .Build();
                 await scheduler.ScheduleJob(trigger);
             }
+            */
+
+
             if (start)
                 await scheduler.Start();
 

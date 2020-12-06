@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net452</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net48</TargetFrameworks>
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
     <GeneratePackageOnBuild Condition="'$(Configuration)' == 'Release'">true</GeneratePackageOnBuild>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -39,6 +39,7 @@
     <PackageReference Include="Microsoft.Owin.Hosting" Version="2.1.0" />
     <PackageReference Include="Microsoft.Owin.Host.HttpListener" Version="2.1.0" />
     <PackageReference Include="Microsoft.AspNet.WebApi.OwinSelfHost" Version="5.2.6" />
+    <PackageReference Include="Npgsql" Version="4.1.6" />
   </ItemGroup>
 
   <ItemGroup Condition="$(DefineConstants.Contains('NETSTANDARD'))">
@@ -53,6 +54,12 @@
 
   <ItemGroup>
     <None Remove="*.vspscc" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+    <PackageReference Include="Npgsql">
+      <Version>4.1.6</Version>
+    </PackageReference>
   </ItemGroup>
 
 </Project>
