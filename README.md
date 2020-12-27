@@ -4,8 +4,14 @@
 
 ---
 
-[![NuGet](https://img.shields.io/nuget/v/Quartzmin.svg)](https://www.nuget.org/packages/Quartzmin)
+[![NuGet](https://img.shields.io/nuget/v/QuartzminFork.svg)](https://www.nuget.org/packages/QuartzminFork)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
+### Quartzmin is  fork from original Quartzmin!
+Few pull requests are merged:
+- [.net core 3.1 support](https://github.com/jlucansky/Quartzmin/pull/27)
+- [SqlServer history plugin](https://github.com/jlucansky/Quartzmin/pull/10)
+
 
 Quartzmin is powerful, easy to use web management tool for Quartz.NET
 
@@ -36,11 +42,11 @@ Quartzmin was created with **Semantic UI** and **Handlebars.Net** as the templat
 - See recent job history, state and error messages
 
 ## Install
-Quartzmin is available on [nuget.org](https://www.nuget.org/packages/Quartzmin)
+Quartzmin is available on [nuget.org](https://www.nuget.org/packages/QuartzminFork)
 
-To install Quartzmin, run the following command in the Package Manager Console
+To install QuartzminFork, run the following command in the Package Manager Console
 ```powershell
-PM> Install-Package Quartzmin
+PM> Install-Package QuartzminFork
 ```
 ## Minimum requirements
 - .NET Framework 4.5.2 
@@ -103,6 +109,29 @@ public void Configure(IApplicationBuilder app)
     });
 }
 ```
+
+### SQL server recent job history persistence
+Execute the SQL server deployment script from the `/Database` folder of this repo in a database of your choosing. 
+
+Add `SqlServerExecutionHistoryPlugin` specific settings to your `App.config` file:
+```xml
+<configuration>
+  <configSections>
+    <section name="quartz" type="System.Configuration.NameValueFileSectionHandler" />
+  </configSections>
+
+  <quartz>
+    <add key="quartz.plugin.quartzmin.type" value="Quartzmin.SelfHost.QuartzminPlugin, Quartzmin.SelfHost" />
+    <add key="quartz.plugin.quartzmin.url" value="http://localhost:5000" />
+      
+    <add key="quartz.plugin.recentHistory.type" value="Quartz.Plugins.RecentHistory.Impl.SqlServer.SqlServerExecutionHistoryPlugin, Quartz.Plugins.RecentHistory" />
+    <add key="quartz.plugin.recentHistory.connectionString" value="Server=.\SQLEXPRESS;Database=Scheduler;Trusted_Connection=True;" />
+    <add key="quartz.plugin.recentHistory.entryTTLInMinutes" value="60" />
+    <add key="quartz.plugin.recentHistory.tablePrefix" value="QRTZ_" />
+  </quartz>
+</configuration>
+```
+
 
 ## Notes
 In clustered environment, it make more sense to host Quarzmin on single dedicated Quartz.NET node in standby mode and implement own `IExecutionHistoryStore` depending on database or ORM framework you typically incorporate. Every clustered Quarz.NET node should be configured with `ExecutionHistoryPlugin` and only dedicated node for management may have `QuartzminPlugin`.

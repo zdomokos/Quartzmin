@@ -13,7 +13,7 @@ namespace Quartz.Plugins.RecentHistory
 
         public string Name { get; set; }
         public Type StoreType { get; set; }
-
+        
         public Task Initialize(string pluginName, IScheduler scheduler, CancellationToken cancellationToken = default(CancellationToken))
         {
             Name = pluginName;
@@ -23,32 +23,28 @@ namespace Quartz.Plugins.RecentHistory
             return Task.FromResult(0);
         }
 
-        public async Task Start(CancellationToken cancellationToken = default(CancellationToken))
+        public Task Start(CancellationToken cancellationToken = default(CancellationToken))
         {
             _store = _scheduler.Context.GetExecutionHistoryStore();
 
             if (_store == null)
             {
-                if (StoreType != null)
-                    _store = (IExecutionHistoryStore)Activator.CreateInstance(StoreType);
-
-                if (_store == null)
-                    throw new Exception(nameof(StoreType) + " is not set.");
+                _store = CreateExecutionHistoryStore();
 
                 _scheduler.Context.SetExecutionHistoryStore(_store);
             }
 
             _store.SchedulerName = _scheduler.SchedulerName;
 
-            await _store.Purge();
+            return _store.Purge();
         }
-
+        
         public Task Shutdown(CancellationToken cancellationToken = default(CancellationToken))
         {
             return Task.FromResult(0);
         }
 
-        public async Task JobToBeExecuted(IJobExecutionContext context, CancellationToken cancellationToken = default(CancellationToken))
+        public Task JobToBeExecuted(IJobExecutionContext context, CancellationToken cancellationToken = default(CancellationToken))
         {
             var entry = new ExecutionHistoryEntry()
             {
@@ -61,7 +57,7 @@ namespace Quartz.Plugins.RecentHistory
                 Job = context.JobDetail.Key.ToString(),
                 Trigger = context.Trigger.Key.ToString(),
             };
-            await _store.Save(entry);
+            return _store.Save(entry);
         }
 
         public async Task JobWasExecuted(IJobExecutionContext context, JobExecutionException jobException, CancellationToken cancellationToken = default(CancellationToken))
@@ -87,6 +83,14 @@ namespace Quartz.Plugins.RecentHistory
                 entry.Vetoed = true;
                 await _store.Save(entry);
             }
+        }
+
+        protected virtual IExecutionHistoryStore CreateExecutionHistoryStore()
+        {
+            if (StoreType != null)
+                return (IExecutionHistoryStore)Activator.CreateInstance(StoreType);
+
+            throw new Exception(nameof(StoreType) + " is not set.");
         }
     }
 }
