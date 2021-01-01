@@ -1,12 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
+<<<<<<< HEAD
+  <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net48</TargetFrameworks>
+    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+    <GeneratePackageOnBuild Condition="'$(Configuration)' == 'Release'">true</GeneratePackageOnBuild>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>1591</NoWarn>
+    <GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
+=======
+	<PropertyGroup>
+		<TargetFrameworks>netstandard2.0;netcoreapp3.1;net452</TargetFrameworks>
 		<RestoreProjectStyle>PackageReference</RestoreProjectStyle>
 		<GeneratePackageOnBuild Condition="'$(Configuration)' == 'Release'">true</GeneratePackageOnBuild>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<NoWarn>1591</NoWarn>
 		<GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
+>>>>>>> shakenovdev/master
 
 		<Version>1.0.5</Version>
 		<Product>Quartzmin</Product>
@@ -47,10 +57,21 @@
 	<ItemGroup>
 		<PackageReference Include="Handlebars.Net" Version="1.9.5" />
 		<PackageReference Include="JsonSubTypes" Version="1.5.1" />
-		<PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-		<PackageReference Include="Quartz" Version="3.2.3" />
+		<PackageReference Include="Quartz" Version="3.0.7" />
 	</ItemGroup>
 
+<<<<<<< HEAD
+  <ItemGroup Condition="$(DefineConstants.Contains('NETSTANDARD'))">
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.DataAnnotations" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Formatters.Json" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics" Version="2.1.0" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="2.1.0" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Physical" Version="2.1.0" />
+    <PackageReference Include="Npgsql" Version="4.1.6" />
+  </ItemGroup>
+=======
 	<ItemGroup Condition="$(DefineConstants.Contains('NETFRAMEWORK'))">
 		<Reference Include="System.Web" />
 		<Reference Include="System.ComponentModel.DataAnnotations" />
@@ -58,6 +79,7 @@
 		<PackageReference Include="Microsoft.AspNet.WebApi.Owin" Version="5.2.6" />
 		<PackageReference Include="Microsoft.Owin.StaticFiles" Version="2.1.0" />
 	</ItemGroup>
+>>>>>>> shakenovdev/master
 
 	<ItemGroup Condition="$(DefineConstants.Contains('NETSTANDARD'))">
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.1.0" />
@@ -67,11 +89,11 @@
 		<PackageReference Include="Microsoft.AspNetCore.Diagnostics" Version="2.1.0" />
 		<PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="2.1.0" />
 		<PackageReference Include="Microsoft.Extensions.FileProviders.Physical" Version="2.1.0" />
-    <PackageReference Include="Npgsql" Version="4.1.6" />
 	</ItemGroup>
 
 	<ItemGroup Condition="$(DefineConstants.Contains('NETCOREAPP'))">
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+		<PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.0" />
 		<PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="3.1.0" />
 		<PackageReference Include="Microsoft.Extensions.FileProviders.Physical" Version="3.1.0" />

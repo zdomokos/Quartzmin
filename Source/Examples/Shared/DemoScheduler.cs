@@ -28,7 +28,7 @@ namespace Quartzmin
                 //["quartz.jobStore.lockHandler.type"] = "Quartz.Impl.AdoJobStore.UpdateLockRowSemaphore, Quartz",
 
                 ["quartz.dataSource.ztg.provider"] = "Npgsql",
-                ["quartz.dataSource.ztg.connectionString"] = "Server=localhost;Port=5432;Database=ZtgAts;Username=postgres;Password=xyz;",
+                ["quartz.dataSource.ztg.connectionString"] = "Server=ztg-srv;Port=5432;Database=ZtgAts;Username=postgres;Password=Asztal15;",
 
                 ["quartz.dbprovider.Npgsql.productName"] = "Npgsql",
                 ["quartz.dbprovider.Npgsql.assemblyName"] = "Npgsql, Version=4.1.6.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7",
@@ -50,6 +50,15 @@ namespace Quartzmin
             //var scheduler = await sf.GetDefaultScheduler();
             var sf = new StdSchedulerFactory(properties);
             var scheduler = await sf.GetScheduler();
+
+
+            var job = JobBuilder.Create<DummyJob>()
+                        .WithIdentity("Sales", "REPORTS")
+                        .WithDescription("Hello Job!")
+                        .StoreDurably()
+                        .Build();
+
+            await scheduler.AddJob(job, true);
 
             /*
             {

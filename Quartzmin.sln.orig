@@ -21,6 +21,7 @@
  EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCoreDocker", "Source\Examples\AspNetCoreDocker\AspNetCoreDocker.csproj", "{68D816F2-21BF-4376-ABF4-70390E4783C5}"
 EndProject
+<<<<<<< Updated upstream
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quartzmin.RestApi", "Source\Quartzmin.RestApi\Quartzmin.RestApi.csproj", "{B338B8C2-EDC4-41B5-AC05-BC77902BDA72}"
  EndProject
  Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCore31", "Source\Examples\AspNetCore31\AspNetCore31.csproj", "{99D97A4F-703E-42C6-89D2-5752D9707AA5}"
@@ -65,10 +66,55 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quartzmin.RestApi", "Source
  		{68D816F2-21BF-4376-ABF4-70390E4783C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
  		{68D816F2-21BF-4376-ABF4-70390E4783C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
  		{68D816F2-21BF-4376-ABF4-70390E4783C5}.Release|Any CPU.Build.0 = Release|Any CPU
+=======
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quartzmin.RestApi", "Source\Quartzmin.RestApi\Quartzmin.RestApi.csproj", "{B338B8C2-EDC4-41B5-AC05-BC77902BDA72}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ztg.Loraq.Service.Scheduler", "Source\Ztg.Loraq.Service.Scheduler\Ztg.Loraq.Service.Scheduler.csproj", "{FB92B8B9-40AB-4AB2-B361-A5EBA69D2051}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E14F97E0-8B3B-43A2-9820-2F4B94497253}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E14F97E0-8B3B-43A2-9820-2F4B94497253}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E14F97E0-8B3B-43A2-9820-2F4B94497253}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E14F97E0-8B3B-43A2-9820-2F4B94497253}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43C177E2-88FB-47CD-ABB3-4A229B969609}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43C177E2-88FB-47CD-ABB3-4A229B969609}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43C177E2-88FB-47CD-ABB3-4A229B969609}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43C177E2-88FB-47CD-ABB3-4A229B969609}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89097967-ADCB-4B14-8497-EB336C6C4CB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89097967-ADCB-4B14-8497-EB336C6C4CB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89097967-ADCB-4B14-8497-EB336C6C4CB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89097967-ADCB-4B14-8497-EB336C6C4CB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6BAF181-02AE-4704-8A6B-A5E270EC721E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6BAF181-02AE-4704-8A6B-A5E270EC721E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6BAF181-02AE-4704-8A6B-A5E270EC721E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6BAF181-02AE-4704-8A6B-A5E270EC721E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58846B68-3786-434E-8675-FD77AC8FDC90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58846B68-3786-434E-8675-FD77AC8FDC90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58846B68-3786-434E-8675-FD77AC8FDC90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58846B68-3786-434E-8675-FD77AC8FDC90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CF90DB9-37C4-4704-910E-BF1DB8AB79F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CF90DB9-37C4-4704-910E-BF1DB8AB79F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CF90DB9-37C4-4704-910E-BF1DB8AB79F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CF90DB9-37C4-4704-910E-BF1DB8AB79F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C54F4403-F40A-497C-B3A7-D1F1E1830D52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C54F4403-F40A-497C-B3A7-D1F1E1830D52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C54F4403-F40A-497C-B3A7-D1F1E1830D52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C54F4403-F40A-497C-B3A7-D1F1E1830D52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68D816F2-21BF-4376-ABF4-70390E4783C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68D816F2-21BF-4376-ABF4-70390E4783C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68D816F2-21BF-4376-ABF4-70390E4783C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68D816F2-21BF-4376-ABF4-70390E4783C5}.Release|Any CPU.Build.0 = Release|Any CPU
+>>>>>>> Stashed changes
 		{B338B8C2-EDC4-41B5-AC05-BC77902BDA72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B338B8C2-EDC4-41B5-AC05-BC77902BDA72}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B338B8C2-EDC4-41B5-AC05-BC77902BDA72}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B338B8C2-EDC4-41B5-AC05-BC77902BDA72}.Release|Any CPU.Build.0 = Release|Any CPU
+<<<<<<< Updated upstream
  		{99D97A4F-703E-42C6-89D2-5752D9707AA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
  		{99D97A4F-703E-42C6-89D2-5752D9707AA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
  		{99D97A4F-703E-42C6-89D2-5752D9707AA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -94,3 +140,24 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quartzmin.RestApi", "Source
  		SolutionGuid = {0357313D-BD09-4C5D-AF0D-439B3BD33B5A}
  	EndGlobalSection
  EndGlobal
+=======
+		{FB92B8B9-40AB-4AB2-B361-A5EBA69D2051}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB92B8B9-40AB-4AB2-B361-A5EBA69D2051}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB92B8B9-40AB-4AB2-B361-A5EBA69D2051}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB92B8B9-40AB-4AB2-B361-A5EBA69D2051}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A6BAF181-02AE-4704-8A6B-A5E270EC721E} = {B669A725-70A9-4E80-BAC7-9765A14CAAA4}
+		{58846B68-3786-434E-8675-FD77AC8FDC90} = {B669A725-70A9-4E80-BAC7-9765A14CAAA4}
+		{7CF90DB9-37C4-4704-910E-BF1DB8AB79F1} = {B669A725-70A9-4E80-BAC7-9765A14CAAA4}
+		{C54F4403-F40A-497C-B3A7-D1F1E1830D52} = {B669A725-70A9-4E80-BAC7-9765A14CAAA4}
+		{68D816F2-21BF-4376-ABF4-70390E4783C5} = {B669A725-70A9-4E80-BAC7-9765A14CAAA4}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0357313D-BD09-4C5D-AF0D-439B3BD33B5A}
+	EndGlobalSection
+EndGlobal
+>>>>>>> Stashed changes

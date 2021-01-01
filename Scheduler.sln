@@ -1,0 +1,54 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ztg.Loraq.Service.Scheduler", "Source\Ztg.Loraq.Service.Scheduler\Ztg.Loraq.Service.Scheduler.csproj", "{FB92B8B9-40AB-4AB2-B361-A5EBA69D2051}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quartz.Plugins.RecentHistory", "Source\Quartz.Plugins.RecentHistory\Quartz.Plugins.RecentHistory.csproj", "{D6D9D249-21C1-4548-B899-1748AE048FE6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quartz.Plugins.RecentHistory.Tests.Integration", "Source\Quartz.Plugins.RecentHistory.Tests.Integration\Quartz.Plugins.RecentHistory.Tests.Integration.csproj", "{1D0193D6-3349-4DD5-94D3-0957771F1471}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quartzmin", "Source\Quartzmin\Quartzmin.csproj", "{9DDF4F1D-E2D1-4679-A24A-35A7963C1900}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormSelfHost", "Source\Examples\WinFormSelfHost\WinFormSelfHost.csproj", "{C54F4403-F40A-497C-B3A7-D1F1E1830D52}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ztg.Loraq.Service.Scheduler.Test", "Source\Ztg.Loraq.Service.Scheduler\Test\Ztg.Loraq.Service.Scheduler.Test.csproj", "{DB403322-AE3F-49F5-8FEB-904F2EF0860F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FB92B8B9-40AB-4AB2-B361-A5EBA69D2051}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB92B8B9-40AB-4AB2-B361-A5EBA69D2051}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB92B8B9-40AB-4AB2-B361-A5EBA69D2051}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB92B8B9-40AB-4AB2-B361-A5EBA69D2051}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6D9D249-21C1-4548-B899-1748AE048FE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6D9D249-21C1-4548-B899-1748AE048FE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6D9D249-21C1-4548-B899-1748AE048FE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6D9D249-21C1-4548-B899-1748AE048FE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D0193D6-3349-4DD5-94D3-0957771F1471}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D0193D6-3349-4DD5-94D3-0957771F1471}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D0193D6-3349-4DD5-94D3-0957771F1471}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D0193D6-3349-4DD5-94D3-0957771F1471}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DDF4F1D-E2D1-4679-A24A-35A7963C1900}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DDF4F1D-E2D1-4679-A24A-35A7963C1900}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DDF4F1D-E2D1-4679-A24A-35A7963C1900}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DDF4F1D-E2D1-4679-A24A-35A7963C1900}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C54F4403-F40A-497C-B3A7-D1F1E1830D52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C54F4403-F40A-497C-B3A7-D1F1E1830D52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C54F4403-F40A-497C-B3A7-D1F1E1830D52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C54F4403-F40A-497C-B3A7-D1F1E1830D52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB403322-AE3F-49F5-8FEB-904F2EF0860F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB403322-AE3F-49F5-8FEB-904F2EF0860F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB403322-AE3F-49F5-8FEB-904F2EF0860F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB403322-AE3F-49F5-8FEB-904F2EF0860F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C7416351-5350-4BB2-9350-6E98341FD676}
+	EndGlobalSection
+EndGlobal

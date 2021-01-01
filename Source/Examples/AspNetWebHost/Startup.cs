@@ -15,7 +15,7 @@ namespace Quartzmin.AspNet
                 Scheduler = DemoScheduler.Create().Result,
 
                 DefaultDateFormat = "dd.MM.yyyy",
-                VirtualPathRoot = "/test",
+                VirtualPathRoot = "/quartzmin",
             });
         }
     }
